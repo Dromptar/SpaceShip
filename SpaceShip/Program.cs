@@ -26,7 +26,7 @@ class Program
         switch (Console.ReadLine())
         {
             case "1":
-                Console.WriteLine("You picked the Blaster !");
+                Console.WriteLine($"You picked {SpaceShip.Engine.Weapon.blaster.Name} !");
                 break;
 
             case "2":
