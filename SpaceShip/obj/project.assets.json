@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "SpaceShip_Engine/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/SpaceShip_Engine.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SpaceShip_Engine.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "SpaceShip_Engine/1.0.0": {
+      "type": "project",
+      "path": "../SpaceShip.Engine/SpaceShip_Engine.csproj",
+      "msbuildProject": "../SpaceShip.Engine/SpaceShip_Engine.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "SpaceShip_Engine >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\simon\\.nuget\\packages\\": {}
@@ -33,7 +52,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\simon\\workspace\\SpaceShip\\SpaceShip.Engine\\SpaceShip_Engine.csproj": {
+              "projectPath": "C:\\Users\\simon\\workspace\\SpaceShip\\SpaceShip.Engine\\SpaceShip_Engine.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

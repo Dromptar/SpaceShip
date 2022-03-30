@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\simon\\workspace\\SpaceShip\\SpaceShip.Engine\\SpaceShip.Engine.csproj",
-      "projectName": "SpaceShip.Engine",
-      "projectPath": "C:\\Users\\simon\\workspace\\SpaceShip\\SpaceShip.Engine\\SpaceShip.Engine.csproj",
+      "projectUniqueName": "C:\\Users\\simon\\workspace\\SpaceShip\\SpaceShip.Engine\\SpaceShip_Engine.csproj",
+      "projectName": "SpaceShip_Engine",
+      "projectPath": "C:\\Users\\simon\\workspace\\SpaceShip\\SpaceShip.Engine\\SpaceShip_Engine.csproj",
       "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\simon\\workspace\\SpaceShip\\SpaceShip.Engine\\obj\\",
       "projectStyle": "PackageReference",

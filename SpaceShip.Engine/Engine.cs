@@ -1,17 +1,42 @@
-﻿namespace SpaceShip.Engine
+﻿namespace SpaceShip_Engine
 {
-
 
     public class Engine
     {
 
-        Weapon blaster = new Weapon("Blaster", 8, 10, 10);
-        Weapon laserStaff = new Weapon("Laser Staff", 10, 12, 6);
-        Weapon energyShield = new Weapon("Energy Shield", 12, 14, 2);
+        public Engine selected_weapon = new Engine();
 
-        Monster wolf = new Monster("Wolf", 4, 2, 2);
-        Monster orc = new Monster("Orc", 5, 2, 3);
-        Monster zombie = new Monster("Zombie", 6, 1, 3);
+        public List<Weapon> weapons = new List<Weapon>
+        {
+            new Weapon
+            {
+                Name = "Blaster",
+                Health = 8,
+                Armor = 10,
+                Damage = 10
+            },
+            new Weapon
+            {
+                Name = "Laser Staff",
+                Health = 6,
+                Armor = 12,
+                Damage = 10
+            },
+            new Weapon
+            {
+                Name = "Energy Shield",
+                Health = 2,
+                Armor = 14,
+                Damage = 12
+            }
+        };
+
+       
+
+
+        //Monster wolf = new Monster("Wolf", 4, 2, 2);
+        //Monster orc = new Monster("Orc", 5, 2, 3);
+        //Monster zombie = new Monster("Zombie", 6, 1, 3);
 
 
     }

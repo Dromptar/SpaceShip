@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceShip", "SpaceShip\SpaceShip.csproj", "{7ED4C258-C884-464E-9A65-BCB67FA67A47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceShip", "SpaceShip\SpaceShip.csproj", "{7ED4C258-C884-464E-9A65-BCB67FA67A47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceShip.Engine", "SpaceShip.Engine\SpaceShip.Engine.csproj", "{0B996AB5-7495-4A4F-8FC8-057624044B68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceShip_Engine", "SpaceShip.Engine\SpaceShip_Engine.csproj", "{0B996AB5-7495-4A4F-8FC8-057624044B68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

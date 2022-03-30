@@ -5,37 +5,44 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-class Program
+namespace SpaceShip_Engine
 {
-    static void Main()
-    {
-        Menu();
-    }
 
-    static void Menu()
+    class Program 
     {
-        Console.WriteLine("Welcome to SpaceShip !");
-        Console.WriteLine();
-        Console.WriteLine("Choose your weapon : ");
-        Console.WriteLine("1. Blaster");
-        Console.WriteLine("2. Laser Staff");
-        Console.WriteLine("3. Energy Shield");
-        Console.WriteLine("4. Quitter;");
-        Console.WriteLine();
 
-        switch (Console.ReadLine())
+        static void Main()
         {
-            case "1":
-                Console.WriteLine($"You picked {SpaceShip.Engine.Weapon.blaster.Name} !");
-                break;
+            Menu();
+        }
 
-            case "2":
-                Console.WriteLine("You picked the Laser Staff !");
-                break;
+        static void Menu()
+        {
+            
 
-            case "3":
-                Console.WriteLine("You picked the Energy Shield !");
-                break;
+            Console.WriteLine("Welcome to SpaceShip !");
+            Console.WriteLine();
+            Console.WriteLine("Choose your weapon : ");
+            Console.WriteLine("1. Blaster");
+            Console.WriteLine("2. Laser Staff");
+            Console.WriteLine("3. Energy Shield");
+            Console.WriteLine("4. Quitter;");
+            Console.WriteLine();
+
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    Console.WriteLine($"You picked {Engine.selected_weapon} !");
+                    break;
+
+                case "2":
+                    Console.WriteLine("You picked the Laser Staff !");
+                    break;
+
+                case "3":
+                    Console.WriteLine("You picked the Energy Shield !");
+                    break;
+            }
         }
     }
 }
