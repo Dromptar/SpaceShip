@@ -13,3 +13,6 @@ C:\Users\simon\workspace\SpaceShip\SpaceShip\obj\Debug\net6.0\refint\SpaceShip.d
 C:\Users\simon\workspace\SpaceShip\SpaceShip\obj\Debug\net6.0\SpaceShip.pdb
 C:\Users\simon\workspace\SpaceShip\SpaceShip\obj\Debug\net6.0\SpaceShip.genruntimeconfig.cache
 C:\Users\simon\workspace\SpaceShip\SpaceShip\obj\Debug\net6.0\ref\SpaceShip.dll
+C:\Users\simon\workspace\SpaceShip\SpaceShip\bin\Debug\net6.0\SpaceShip_Engine.dll
+C:\Users\simon\workspace\SpaceShip\SpaceShip\bin\Debug\net6.0\SpaceShip_Engine.pdb
+C:\Users\simon\workspace\SpaceShip\SpaceShip\obj\Debug\net6.0\SpaceShip.csproj.CopyComplete

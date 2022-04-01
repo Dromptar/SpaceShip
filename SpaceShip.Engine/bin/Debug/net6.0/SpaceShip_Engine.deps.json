@@ -6,14 +6,6 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "SpaceShip/1.0.0": {
-        "dependencies": {
-          "SpaceShip_Engine": "1.0.0"
-        },
-        "runtime": {
-          "SpaceShip.dll": {}
-        }
-      },
       "SpaceShip_Engine/1.0.0": {
         "runtime": {
           "SpaceShip_Engine.dll": {}
@@ -22,11 +14,6 @@
     }
   },
   "libraries": {
-    "SpaceShip/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "SpaceShip_Engine/1.0.0": {
       "type": "project",
       "serviceable": false,

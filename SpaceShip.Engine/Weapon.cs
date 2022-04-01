@@ -17,8 +17,6 @@ namespace SpaceShip_Engine
         public Weapon()
         { 
         
-        
-        
         }
 
             

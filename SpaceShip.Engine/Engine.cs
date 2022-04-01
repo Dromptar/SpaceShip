@@ -4,9 +4,10 @@
     public class Engine
     {
 
-        public Engine selected_weapon = new Engine();
+        public Weapon Selected_weapon { get; set; }
+        public Monster Selected_monster { get; set; }
 
-        public List<Weapon> weapons = new List<Weapon>
+        public List<Weapon> weapons_list = new List<Weapon>
         {
             new Weapon
             {
@@ -31,13 +32,30 @@
             }
         };
 
-       
-
-
-        //Monster wolf = new Monster("Wolf", 4, 2, 2);
-        //Monster orc = new Monster("Orc", 5, 2, 3);
-        //Monster zombie = new Monster("Zombie", 6, 1, 3);
-
+        public List<Monster> monsters_list = new List<Monster>
+        {
+            new Monster
+            {
+                Name = "Rancor",
+                Health = 4,
+                Armor = 2,
+                Damage = 2
+            },
+            new Monster
+            {
+                Name = "Gretchin",
+                Health = 5,
+                Armor = 2,
+                Damage = 3
+            },
+            new Monster
+            {
+                Name = "Droid",
+                Health = 6,
+                Armor = 1,
+                Damage = 3
+            }
+        };
 
     }
 }

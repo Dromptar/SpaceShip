@@ -13,12 +13,9 @@ namespace SpaceShip_Engine
         public int Armor { get; set; }
         public int Damage { get; set; }
 
-        public Monster(string Name, int Health, int Armor, int Damage)
+        public Monster()
         {
-            Name = Name;
-            Health = Health;
-            Armor = Armor;
-            Damage = Damage;
+            
         }
     }
 }
