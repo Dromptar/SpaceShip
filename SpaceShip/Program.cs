@@ -13,7 +13,9 @@ namespace SpaceShip_Engine
 
         static void Main()
         {
-            Menu();
+            Engine engine = new Engine();
+            //Menu();
+            engine.Fight();
         }
 
         static void Menu()
@@ -41,20 +43,17 @@ namespace SpaceShip_Engine
                               $"It also permits to deal {engine.weapons_list[playerChoice - 1].Damage} damages to an eventual target ");
             Console.WriteLine();
             Console.WriteLine("Oh, one last thing before you go. The Spaceship could be dangerous.");
-
-            Console.WriteLine("List of monsters: {0}", string.Join(",", engine.Selected_monster.Name));
-            
-            
-
+            Console.WriteLine("You could meet some creatures during your trip, like  {0}", string.Join(", ", engine.monsters_list.Select(m => m.Name)));
             Console.WriteLine("Be Careful...");
-                              
+            Console.WriteLine();
 
             Console.WriteLine($"Now let's fight the evil of the lost Spaceship with your new {engine.weapons_list[playerChoice - 1].Name} ..." + "\n" +
                 $"Ready?");
-            Console.ReadKey(true);
-            
-
-            
+            Console.ReadKey(true);   
+         
         }
+
+        
+
     }
 }
