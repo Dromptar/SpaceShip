@@ -65,22 +65,16 @@
 
             Console.WriteLine($"You enter in the first room. It's dark, but you can see a big shadow in front of you. Seems to be a {engine.monsters_list[index].Name}");
 
+            while(engine.Selected_weapon.CurrentHealth > 0 && engine.Appearing_monster.CurrentHealth > 0)
+            {
+                engine.Selected_weapon.Attack(Appearing_monster);
+                engine.Appearing_monster.Attack(Selected_weapon);
+
+            }
             
-         
-        }
-
-        public void Attack()
-        {
-            Engine engine = new Engine();
-            
-            engine.Appearing_monster.CurrentHealth = engine.Appearing_monster.MaxHealth - engine.Selected_weapon.Damage;
-            engine.Selected_weapon.CurrentHealth = engine.Selected_weapon.MaxHealth - engine.Appearing_monster.Damage;
-
-
-
-
 
         }
 
+       
     }
 }

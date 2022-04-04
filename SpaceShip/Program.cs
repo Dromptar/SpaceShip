@@ -14,9 +14,10 @@ namespace SpaceShip_Engine
         static void Main()
         {
             Engine engine = new Engine();
-            //Menu();
+            Menu();
             engine.Fight();
         }
+
 
         static void Menu()
         {
@@ -39,7 +40,7 @@ namespace SpaceShip_Engine
             
             int playerChoice = int.Parse(Console.ReadLine());
             Console.WriteLine($"You picked {engine.weapons_list[playerChoice - 1].Name} !" + "\n" +
-                              $"The {engine.weapons_list[playerChoice - 1].Name} you chose offers you {engine.weapons_list[playerChoice - 1].Health} points of life and {engine.weapons_list[playerChoice - 1].Armor} of protection " + "\n" +
+                              $"The {engine.weapons_list[playerChoice - 1].Name} offers you {engine.weapons_list[playerChoice - 1].MaxHealth} points of life and {engine.weapons_list[playerChoice - 1].Armor} of protection " + "\n" +
                               $"It also permits to deal {engine.weapons_list[playerChoice - 1].Damage} damages to an eventual target ");
             Console.WriteLine();
             Console.WriteLine("Oh, one last thing before you go. The Spaceship could be dangerous.");
@@ -49,8 +50,9 @@ namespace SpaceShip_Engine
 
             Console.WriteLine($"Now let's fight the evil of the lost Spaceship with your new {engine.weapons_list[playerChoice - 1].Name} ..." + "\n" +
                 $"Ready?");
-            Console.ReadKey(true);   
-         
+            Console.ReadKey(true);
+
+           
         }
 
         
