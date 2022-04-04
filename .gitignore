@@ -361,12 +361,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-Guarani.DiplomAdvisor.Data/Models/Formation.cs
-Guarani.DiplomAdvisor.Services/Implementations/OldDbPostgre/OldDbPostgreService.cs
-Guarani.DiplomAdvisor.Services/Implementations/OldDbPostgre/OldDbPostgreService.cs
-Guarani.DiplomAdvisor.Data/Models/Formation.cs
-Guarani.DiplomAdvisor.Jobs/appsettings.json
-Guarani.DiplomAdvisor.WebAPI/appsettings.json
-**/.vscode/launch.json
-Guarani.DiplomAdvisor.WebAPI/appsettings.Development.json
-Guarani.DiplomAdvisor.Jobs/appsettings.Development.json
+.vs
