@@ -73,11 +73,12 @@
         {
             Engine engine = new Engine();
             
-            engine.Selected_weapon.CurrentHealth = engine.Selected_weapon.MaxHealth - engine.Selected_weapon.Damage;
+            engine.Appearing_monster.CurrentHealth = engine.Appearing_monster.MaxHealth - engine.Selected_weapon.Damage;
+            engine.Selected_weapon.CurrentHealth = engine.Selected_weapon.MaxHealth - engine.Appearing_monster.Damage;
 
 
-           
-            
+
+
 
         }
 
