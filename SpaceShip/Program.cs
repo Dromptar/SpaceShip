@@ -15,7 +15,7 @@ namespace SpaceShip_Engine
         {
             Engine engine = new Engine();
             Menu();
-            engine.Fight();
+            
         }
 
 
@@ -23,7 +23,6 @@ namespace SpaceShip_Engine
         {
             Engine engine = new Engine();
             
-
             Console.WriteLine("Welcome to SpaceShip !");
             Console.WriteLine();
             Console.WriteLine("Press any key to start the game...");
@@ -52,7 +51,8 @@ namespace SpaceShip_Engine
                 $"Ready?");
             Console.ReadKey(true);
 
-           
+            
+
         }
 
         
