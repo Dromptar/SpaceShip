@@ -19,6 +19,13 @@ namespace SpaceShip_Engine
         { 
         }
 
+        public void attack()
+        {
+            Engine engine = new Engine();
+            engine.Appearing_monster.CurrentHealth = engine.Appearing_monster.MaxHealth - engine.Selected_weapon.Damage;
+            Console.WriteLine(engine.Appearing_monster.CurrentHealth);
+        }
+
        
 
 

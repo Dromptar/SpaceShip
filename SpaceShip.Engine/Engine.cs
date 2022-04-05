@@ -4,8 +4,8 @@
     public class Engine
     {
         
-        public Weapon Selected_weapon { get; set; }
-        public Monster Appearing_monster { get; set; }
+        public Weapon Selected_weapon { get; set; } // null
+        public Monster Appearing_monster { get; set; } // null
 
         public List<Weapon> weapons_list = new List<Weapon>
         {
@@ -57,39 +57,7 @@
             }
         };
 
-        public void Fight()
-        {
-            var random = new Random();
-            int index = random.Next(monsters_list.Count);
-
-            Console.WriteLine($"You enter in the first room. It's dark, but you can see a big shadow in front of you. Seems to be a {engine.monsters_list[index].Name}");
-
-            while(Selected_weapon.CurrentHealth > 0 && Appearing_monster.CurrentHealth > 0)
-            {
-                Attack();
-
-                if(Selected_weapon.MaxHealth <= 0)
-                {
-                    Console.WriteLine("Game Over");
-                } 
-                else if(Appearing_monster.MaxHealth <= 0)
-                {
-                    Console.WriteLine("Bravo, vous avez vaincu ce monstre!");
-                }
-
-            } 
-
-        }
-
-        public void Attack()
-        {
-            Appearing_monster.CurrentHealth = Appearing_monster.MaxHealth - Selected_weapon.Damage;
-            Selected_weapon.CurrentHealth = Selected_weapon.MaxHealth - Appearing_monster.Damage;
-
-
-        }
-
-        
+                 
 
     }
 }
