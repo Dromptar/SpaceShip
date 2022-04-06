@@ -14,8 +14,7 @@ namespace SpaceShip_Engine
         static void Main()
         {
             Engine engine = new Engine();
-            Menu();
-            engine.Fight();
+            Menu();    
         }
 
 
@@ -23,7 +22,7 @@ namespace SpaceShip_Engine
         {
             Engine engine = new Engine();
             
-
+            
             Console.WriteLine("Welcome to SpaceShip !");
             Console.WriteLine();
             Console.WriteLine("Press any key to start the game...");
@@ -51,8 +50,21 @@ namespace SpaceShip_Engine
             Console.WriteLine($"Now let's fight the evil of the lost Spaceship with your new {engine.weapons_list[playerChoice - 1].Name} ..." + "\n" +
                 $"Ready?");
             Console.ReadKey(true);
+            Console.Clear();
 
-           
+        
+            var random = new Random();
+            int index = random.Next(engine.monsters_list.Count);
+            engine.Appearing_monster = engine.monsters_list[index];
+            engine.Selected_weapon = engine.weapons_list[playerChoice - 1];
+
+            Console.WriteLine($"You enter in the first room. It's dark, but you can see a big shadow in front of you. Seems to be a {engine.Appearing_monster.Name}");
+            Console.WriteLine($"You use your {engine.Selected_weapon.Name} to defend yourself!");
+
+            engine.Selected_weapon.Attack();
+
+
+
         }
 
         

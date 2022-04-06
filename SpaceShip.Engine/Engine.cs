@@ -4,8 +4,8 @@
     public class Engine
     {
         
-        public Weapon Selected_weapon { get; set; }
-        public Monster Appearing_monster { get; set; }
+        public Weapon Selected_weapon { get; set; } // null
+        public Monster Appearing_monster { get; set; } // null
 
         public List<Weapon> weapons_list = new List<Weapon>
         {
@@ -57,24 +57,7 @@
             }
         };
 
-        public void Fight()
-        {
-            Engine engine = new Engine();
-            var random = new Random();
-            int index = random.Next(engine.monsters_list.Count);
+                 
 
-            Console.WriteLine($"You enter in the first room. It's dark, but you can see a big shadow in front of you. Seems to be a {engine.monsters_list[index].Name}");
-
-            while(engine.Selected_weapon.CurrentHealth > 0 && engine.Appearing_monster.CurrentHealth > 0)
-            {
-                engine.Selected_weapon.Attack(Appearing_monster);
-                engine.Appearing_monster.Attack(Selected_weapon);
-
-            }
-            
-
-        }
-
-       
     }
 }
