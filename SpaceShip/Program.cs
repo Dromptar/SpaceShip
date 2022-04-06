@@ -22,7 +22,7 @@ namespace SpaceShip_Engine
         {
             Engine engine = new Engine();
             
-            
+            // Here is the menu to pick you weapon
             Console.WriteLine("Welcome to SpaceShip !");
             Console.WriteLine();
             Console.WriteLine("Press any key to start the game...");
@@ -36,7 +36,7 @@ namespace SpaceShip_Engine
             }
             Console.WriteLine("4. Quitter;");
 
-            
+            // When weapon is picked, we give some information to player
             int playerChoice = int.Parse(Console.ReadLine());
             Console.WriteLine($"You picked {engine.weapons_list[playerChoice - 1].Name} !" + "\n" +
                               $"The {engine.weapons_list[playerChoice - 1].Name} offers you {engine.weapons_list[playerChoice - 1].MaxHealth} points of life and {engine.weapons_list[playerChoice - 1].Armor} of protection " + "\n" +
@@ -52,22 +52,27 @@ namespace SpaceShip_Engine
             Console.ReadKey(true);
             Console.Clear();
 
-        
-            var random = new Random();
-            int index = random.Next(engine.monsters_list.Count);
-            engine.Appearing_monster = engine.monsters_list[index];
+            //We generate a random monster and use the weapon picked up by player to start a fight
             engine.Selected_weapon = engine.weapons_list[playerChoice - 1];
+            engine.GenerateMonster();
 
-            Console.WriteLine($"You enter in the first room. It's dark, but you can see a big shadow in front of you. Seems to be a {engine.Appearing_monster.Name}");
-            Console.WriteLine($"You use your {engine.Selected_weapon.Name} to defend yourself!");
+            Console.WriteLine($"You enter in the first room. It's dark, but you can see a big shadow in front of you. " +
+                              $"Looks to be a {engine.Appearing_monster.Name}.");
+            Console.WriteLine($"You grab your {engine.Selected_weapon.Name} and a violent fight takes place!");
+            Console.WriteLine($"This {engine.Appearing_monster.Name} has {engine.Appearing_monster.MaxHealth} point of life.");
+            
+            // Starting the fight
+            engine.Fight();
+            Console.WriteLine($"After your strike the {engine.Appearing_monster.Name} has {engine.Appearing_monster.MaxHealth} point of life.");
 
-            engine.Selected_weapon.Attack();
+
 
 
 
         }
 
-        
+
+
 
     }
 }

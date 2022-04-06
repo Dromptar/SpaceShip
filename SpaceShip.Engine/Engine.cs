@@ -7,6 +7,7 @@
         public Weapon Selected_weapon { get; set; } // null
         public Monster Appearing_monster { get; set; } // null
 
+
         public List<Weapon> weapons_list = new List<Weapon>
         {
             new Weapon
@@ -57,7 +58,26 @@
             }
         };
 
-                 
+
+
+        public void GenerateMonster()
+        {
+            var random = new Random();
+            int index = random.Next(monsters_list.Count);
+            Appearing_monster = monsters_list[index];
+        }
+        public void Fight()
+        {
+            
+            while (Appearing_monster.MaxHealth > 0 && Selected_weapon.MaxHealth > 0)
+            {
+                Appearing_monster.MaxHealth = Appearing_monster.MaxHealth - Selected_weapon.Damage;
+      
+            }
+            
+        }
+
+        
 
     }
 }
