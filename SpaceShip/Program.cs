@@ -60,12 +60,22 @@ namespace SpaceShip_Engine
                               $"Looks to be a {engine.Appearing_monster.Name}.");
             Console.WriteLine($"You grab your {engine.Selected_weapon.Name} and a violent fight takes place!");
             Console.WriteLine($"This {engine.Appearing_monster.Name} has {engine.Appearing_monster.MaxHealth} point of life.");
-            
+
             // Starting the fight
-            engine.Fight();
+            while (engine.Appearing_monster.MaxHealth > 0 && engine.Selected_weapon.MaxHealth > 0)
+            {
+                engine.Fight();
+
+            }
+
+            Console.WriteLine();
             Console.WriteLine($"After your strike the {engine.Appearing_monster.Name} has {engine.Appearing_monster.MaxHealth} point of life.");
+            Console.WriteLine($"You still have {engine.Selected_weapon.MaxHealth} point of life.");
 
-
+            if(engine.IsDead())
+            {
+                Console.WriteLine($"The crerature is dead. You won the fight!");
+            }
 
 
 

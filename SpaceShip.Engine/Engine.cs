@@ -68,15 +68,23 @@
         }
         public void Fight()
         {
-            
-            while (Appearing_monster.MaxHealth > 0 && Selected_weapon.MaxHealth > 0)
+            Appearing_monster.MaxHealth = Appearing_monster.MaxHealth - Selected_weapon.Damage;
+            Selected_weapon.MaxHealth = Selected_weapon.MaxHealth - Appearing_monster.Damage;
+
+        }
+
+        public bool IsDead()
+        {
+            if (Appearing_monster.MaxHealth <= 0 || Selected_weapon.MaxHealth <= 0)
             {
-                Appearing_monster.MaxHealth = Appearing_monster.MaxHealth - Selected_weapon.Damage;
-      
+                return true;
+            }
+            else
+            {
+                return false;
             }
             
         }
-
         
 
     }
