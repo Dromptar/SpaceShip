@@ -15,16 +15,16 @@ namespace SpaceShip_Engine
         public int Armor { get; set; }
         public int MinDamage { get; set; }
         public int MaxDamage { get; set; }
+        public int Damage { get; set; }
+       
         
         
         public Weapon()
         {
             
+
         }
 
-        
-
-        
-
+      
     }
 }

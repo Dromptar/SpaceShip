@@ -66,10 +66,17 @@
         };
    
 
-        public int RandomDamage(Weapon weapon)
+        public int WeaponRandomDamage(Weapon weapon)
         {
             Random rnd = new Random();
             int Damage = rnd.Next(weapon.MinDamage, weapon.MaxDamage);
+            return Damage;
+        }
+
+        public int MonsterRandomDamage(Monster monster)
+        {
+            Random rnd = new Random();
+            int Damage = rnd.Next(monster.MinDamage, monster.MaxDamage);
             return Damage;
         }
 
@@ -83,27 +90,18 @@
 
         public void MonsterAttack()
         {
-            Selected_weapon.CurrentHealth = Selected_weapon.CurrentHealth - Appearing_monster.Damage;
+            Selected_weapon.CurrentHealth = Selected_weapon.CurrentHealth - MonsterRandomDamage(Appearing_monster);
         }
 
 
         public void WeaponAttack()
         {
-            Appearing_monster.CurrentHealth = Appearing_monster.CurrentHealth - Selected_weapon.Damage;
+            Appearing_monster.CurrentHealth = Appearing_monster.CurrentHealth - WeaponRandomDamage(Selected_weapon);
 
         }
 
-        public bool IsDead()
-        {
-            if (Appearing_monster.MaxHealth <= 0 || Selected_weapon.MaxHealth <= 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
 
-        }
+
+        
     }
 }
