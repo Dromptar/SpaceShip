@@ -13,14 +13,13 @@ namespace SpaceShip_Engine
         public int MaxHealth { get; set; }
         public int CurrentHealth { get; set; }
         public int Armor { get; set; }
+        public int MinDamage { get; set; }
+        public int MaxDamage { get; set; }
         
-        public int Damage { get; set; }
-
         
         public Weapon()
         {
-            Random rnd = new Random();
-            Damage = rnd.Next();
+            
         }
 
         

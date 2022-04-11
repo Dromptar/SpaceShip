@@ -40,7 +40,7 @@ namespace SpaceShip_Engine
             int playerChoice = int.Parse(Console.ReadLine());
             Console.WriteLine($"You picked {engine.weapons_list[playerChoice - 1].Name} !" + "\n" +
                               $"The {engine.weapons_list[playerChoice - 1].Name} offers you {engine.weapons_list[playerChoice - 1].MaxHealth} points of life and {engine.weapons_list[playerChoice - 1].Armor} of protection " + "\n" +
-                              $"It also permits to deal {engine.weapons_list[playerChoice - 1].Damage} damages to an eventual target ");
+                              $"It also permits to deal between{engine.weapons_list[playerChoice - 1].MinDamage} and {engine.weapons_list[playerChoice - 1].MaxDamage} damages to an eventual target ");
             Console.WriteLine();
             Console.WriteLine("Oh, one last thing before you go. The Spaceship could be dangerous.");
             Console.WriteLine("You could meet some creatures during your trip, like  {0}", string.Join(", ", engine.monsters_list.Select(m => m.Name)));
@@ -77,7 +77,7 @@ namespace SpaceShip_Engine
                 // Tour du joueur
                 Console.ForegroundColor = ConsoleColor.Green;
                 engine.WeaponAttack();
-                Console.WriteLine($"You stroke the creature and deals {engine.Selected_weapon.Damage}");
+                Console.WriteLine($"You stroke the creature and deals {engine.RandomDamage(engine.Selected_weapon)}");
                 Console.WriteLine();
                 Console.ReadKey(true);
 

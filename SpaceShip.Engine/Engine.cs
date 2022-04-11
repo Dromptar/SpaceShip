@@ -16,24 +16,24 @@
                 Name = "Blaster",
                 MaxHealth = 8,
                 Armor = 10,
-                
-                
-
-
+                MinDamage = 1,
+                MaxDamage = 10
             },
             new Weapon
             {
                 Name = "Laser Staff",
                 MaxHealth = 6,
                 Armor = 12,
-                Damage = 6
+                MinDamage = 1,
+                MaxDamage = 6
             },
             new Weapon
             {
                 Name = "Energy Shield",
                 MaxHealth = 12,
                 Armor = 14,
-                Damage = 2
+                MinDamage = 1,
+                MaxDamage = 4
             }
         };
 
@@ -44,24 +44,34 @@
                 Name = "Rancor",
                 MaxHealth = 12,
                 Armor = 2,
-                Damage = 2
+                MinDamage = 1,
+                MaxDamage = 8
             },
             new Monster
             {
                 Name = "Gretchin",
                 MaxHealth = 5,
                 Armor = 2,
-                Damage = 3
+                MinDamage = 1,
+                MaxDamage = 4
             },
             new Monster
             {
                 Name = "Droid",
                 MaxHealth = 7,
                 Armor = 1,
-                Damage = 3
+                MinDamage = 1,
+                MaxDamage = 6
             }
         };
+   
 
+        public int RandomDamage(Weapon weapon)
+        {
+            Random rnd = new Random();
+            int Damage = rnd.Next(weapon.MinDamage, weapon.MaxDamage);
+            return Damage;
+        }
 
 
         public void GenerateMonster()
