@@ -3,26 +3,30 @@
 
     public class Engine
     {
-        
+
         public Weapon Selected_weapon { get; set; } // null
         public Monster Appearing_monster { get; set; } // null
 
 
         public List<Weapon> weapons_list = new List<Weapon>
         {
+
             new Weapon
             {
                 Name = "Blaster",
                 MaxHealth = 8,
                 Armor = 10,
-                Damage = 10
+                
+                
+
+
             },
             new Weapon
             {
                 Name = "Laser Staff",
                 MaxHealth = 6,
                 Armor = 12,
-                Damage = 10
+                Damage = 6
             },
             new Weapon
             {
@@ -38,7 +42,7 @@
             new Monster
             {
                 Name = "Rancor",
-                MaxHealth = 4,
+                MaxHealth = 12,
                 Armor = 2,
                 Damage = 2
             },
@@ -52,7 +56,7 @@
             new Monster
             {
                 Name = "Droid",
-                MaxHealth = 6,
+                MaxHealth = 7,
                 Armor = 1,
                 Damage = 3
             }
@@ -62,14 +66,20 @@
 
         public void GenerateMonster()
         {
-            var random = new Random();
-            int index = random.Next(monsters_list.Count);
+            var rnd = new Random();
+            int index = rnd.Next(monsters_list.Count);
             Appearing_monster = monsters_list[index];
         }
-        public void Fight()
+
+        public void MonsterAttack()
         {
-            Appearing_monster.MaxHealth = Appearing_monster.MaxHealth - Selected_weapon.Damage;
-            Selected_weapon.MaxHealth = Selected_weapon.MaxHealth - Appearing_monster.Damage;
+            Selected_weapon.CurrentHealth = Selected_weapon.CurrentHealth - Appearing_monster.Damage;
+        }
+
+
+        public void WeaponAttack()
+        {
+            Appearing_monster.CurrentHealth = Appearing_monster.CurrentHealth - Selected_weapon.Damage;
 
         }
 
@@ -83,9 +93,7 @@
             {
                 return false;
             }
-            
-        }
-        
 
+        }
     }
 }

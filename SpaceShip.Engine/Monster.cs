@@ -14,6 +14,8 @@ namespace SpaceShip_Engine
         public int Armor { get; set; }
         public int Damage { get; set; }
 
+        public Random rnd = new Random();
+
         public Monster()
         {
             

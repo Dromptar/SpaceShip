@@ -62,23 +62,39 @@ namespace SpaceShip_Engine
             Console.WriteLine($"This {engine.Appearing_monster.Name} has {engine.Appearing_monster.MaxHealth} point of life.");
 
             // Starting the fight
-            while (engine.Appearing_monster.MaxHealth > 0 && engine.Selected_weapon.MaxHealth > 0)
-            {
-                engine.Fight();
+            engine.Selected_weapon.CurrentHealth = engine.Selected_weapon.MaxHealth;
+            engine.Appearing_monster.CurrentHealth = engine.Appearing_monster.MaxHealth;
 
+            while (!engine.IsDead())
+            {
+                // Tour du monstre
+                Console.ForegroundColor = ConsoleColor.Red;
+                engine.MonsterAttack();
+                Console.WriteLine($"The {engine.Appearing_monster.Name} attacks and deals {engine.Appearing_monster.Damage}");
+                Console.WriteLine();
+                Console.ReadKey(true);
+
+                // Tour du joueur
+                Console.ForegroundColor = ConsoleColor.Green;
+                engine.WeaponAttack();
+                Console.WriteLine($"You stroke the creature and deals {engine.Selected_weapon.Damage}");
+                Console.WriteLine();
+                Console.ReadKey(true);
+
+                if (engine.Selected_weapon.CurrentHealth <= 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Game Over");
+                    break;
+                }
+                
             }
 
-            Console.WriteLine();
-            Console.WriteLine($"After your strike the {engine.Appearing_monster.Name} has {engine.Appearing_monster.MaxHealth} point of life.");
-            Console.WriteLine($"You still have {engine.Selected_weapon.MaxHealth} point of life.");
-
-            if(engine.IsDead())
-            {
-                Console.WriteLine($"The crerature is dead. You won the fight!");
-            }
-
-
-
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"The {engine.Appearing_monster.Name} is dead. You won the fight!");
+                Console.WriteLine($"You still have {engine.Selected_weapon.CurrentHealth} point of life after the fight.");
+         
+            
         }
 
 
