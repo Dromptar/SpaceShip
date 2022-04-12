@@ -13,7 +13,6 @@ namespace SpaceShip_Engine
 
         static void Main()
         {
-            Engine engine = new Engine();
             Menu();    
         }
 
@@ -21,8 +20,9 @@ namespace SpaceShip_Engine
         static void Menu()
         {
             Engine engine = new Engine();
-            
+
             // Here is the menu to pick you weapon
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Welcome to SpaceShip !");
             Console.WriteLine();
             Console.WriteLine("Press any key to start the game...");
@@ -39,10 +39,10 @@ namespace SpaceShip_Engine
             // When weapon is picked, we give some information to player
             int playerChoice = int.Parse(Console.ReadLine());
             Console.WriteLine($"You picked {engine.weapons_list[playerChoice - 1].Name} !" + "\n" +
-                              $"The {engine.weapons_list[playerChoice - 1].Name} offers you {engine.weapons_list[playerChoice - 1].MaxHealth} points of life and {engine.weapons_list[playerChoice - 1].Armor} of protection " + "\n" +
-                              $"It also permits to deal between{engine.weapons_list[playerChoice - 1].MinDamage} and {engine.weapons_list[playerChoice - 1].MaxDamage} damages to an eventual target ");
+                              $"The {engine.weapons_list[playerChoice - 1].Name} offers you {engine.weapons_list[playerChoice - 1].MaxHealth} HP and {engine.weapons_list[playerChoice - 1].Armor} of protection. " + "\n" +
+                              $"It also permits to deal between {engine.weapons_list[playerChoice - 1].MinDamage} and {engine.weapons_list[playerChoice - 1].MaxDamage} damages to an eventual target. ");
             Console.WriteLine();
-            Console.WriteLine("Oh, one last thing before you go. The Spaceship could be dangerous.");
+            Console.WriteLine("Oh, one more thing before you go. The Spaceship could be dangerous.");
             Console.WriteLine("You could meet some creatures during your trip, like  {0}", string.Join(", ", engine.monsters_list.Select(m => m.Name)));
             Console.WriteLine("Be Careful...");
             Console.WriteLine();
@@ -60,7 +60,8 @@ namespace SpaceShip_Engine
                               $"Looks to be a {engine.Appearing_monster.Name}.");
             Console.WriteLine($"You grab your {engine.Selected_weapon.Name} and a violent fight takes place!");
             Console.WriteLine();
-            Console.WriteLine($"This {engine.Appearing_monster.Name} has {engine.Appearing_monster.MaxHealth} point of life.");
+            Console.WriteLine($"This {engine.Appearing_monster.Name} has {engine.Appearing_monster.MaxHealth} HP.");
+            Console.WriteLine($"You have {engine.Selected_weapon.MaxHealth} HP.");
             Console.WriteLine();
 
             // Starting the fight
@@ -71,9 +72,8 @@ namespace SpaceShip_Engine
             {
                 // Tour du monstre
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"You have {engine.Selected_weapon.CurrentHealth} points of life.");
                 Console.WriteLine($"The {engine.Appearing_monster.Name} attacks and deals {engine.MonsterAttack()} damages.");
-                Console.WriteLine($"You still have {engine.Selected_weapon.CurrentHealth} points of life.");
+                Console.WriteLine($"You still have {engine.Selected_weapon.CurrentHealth} HP.");
                 Console.WriteLine();
                 Console.ReadKey(true);
 
@@ -86,17 +86,16 @@ namespace SpaceShip_Engine
 
                 // Tour du joueur
                 Console.ForegroundColor = ConsoleColor.Green;
-                engine.WeaponAttack();
-                Console.WriteLine($"You stroke the creature and deals {engine.WeaponRandomDamage(engine.Selected_weapon)}");
-                Console.WriteLine($"The {engine.Appearing_monster.Name} still have {engine.Appearing_monster.CurrentHealth} points of life.");
+                Console.WriteLine($"You strike the creature and deals {engine.WeaponAttack()} damages!");
+                Console.WriteLine($"The {engine.Appearing_monster.Name} still have {engine.Appearing_monster.CurrentHealth} HP.");
                 Console.WriteLine();
                 Console.ReadKey(true);
 
                 if(engine.Appearing_monster.CurrentHealth <= 0)
                 {
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"The {engine.Appearing_monster.Name} is dead. You won the fight!");
-                    Console.WriteLine($"You still have {engine.Selected_weapon.CurrentHealth} point of life after the fight.");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"The {engine.Appearing_monster.Name} is dead. Congratulation! You won the fight!");
+                    Console.WriteLine($"You still have {engine.Selected_weapon.CurrentHealth} HP after the fight.");
                     break;
                 }
 

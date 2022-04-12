@@ -1,8 +1,9 @@
 ﻿namespace SpaceShip_Engine
 {
-
+    
     public class Engine
     {
+        Weapon weapon = new Weapon();
 
         public Weapon Selected_weapon { get; set; } // null
         public Monster Appearing_monster { get; set; } // null
@@ -81,9 +82,10 @@
         }
 
         public int MonsterAttack()
-        { 
-            Selected_weapon.CurrentHealth -= MonsterRandomDamage(Appearing_monster);
-            return Selected_weapon.CurrentHealth;
+        {
+            int Damage = MonsterRandomDamage(Appearing_monster);
+            Selected_weapon.CurrentHealth -= Damage;
+            return Damage;
         }
 
         public int WeaponRandomDamage(Weapon weapon)
@@ -92,9 +94,11 @@
             int Damage = rnd.Next(weapon.MinDamage, weapon.MaxDamage);
             return Damage;
         }
-        public void WeaponAttack()
+        public int WeaponAttack()
         {
-            Appearing_monster.CurrentHealth -= WeaponRandomDamage(Selected_weapon);
+            int Damage = WeaponRandomDamage(Selected_weapon);
+            Appearing_monster.CurrentHealth -= Damage;
+            return Damage;
 
         }
 

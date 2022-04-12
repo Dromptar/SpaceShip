@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceShip", "SpaceShip\Spac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceShip_Engine", "SpaceShip.Engine\SpaceShip_Engine.csproj", "{0B996AB5-7495-4A4F-8FC8-057624044B68}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "ClassLibrary1\Model.csproj", "{F28ED2CF-1ADA-4AEF-8F90-122B57CA995D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0B996AB5-7495-4A4F-8FC8-057624044B68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B996AB5-7495-4A4F-8FC8-057624044B68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B996AB5-7495-4A4F-8FC8-057624044B68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F28ED2CF-1ADA-4AEF-8F90-122B57CA995D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F28ED2CF-1ADA-4AEF-8F90-122B57CA995D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F28ED2CF-1ADA-4AEF-8F90-122B57CA995D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F28ED2CF-1ADA-4AEF-8F90-122B57CA995D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
