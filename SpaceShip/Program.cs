@@ -66,13 +66,13 @@ namespace SpaceShip_Engine
             // Starting the fight
             engine.Selected_weapon.CurrentHealth = engine.Selected_weapon.MaxHealth;
             engine.Appearing_monster.CurrentHealth = engine.Appearing_monster.MaxHealth;
-
-            while (engine.Appearing_monster.MaxHealth >= 0 || engine.Selected_weapon.MaxHealth >= 0)
+            
+            while (engine.Appearing_monster.CurrentHealth >= 0 || engine.Selected_weapon.CurrentHealth >= 0)
             {
                 // Tour du monstre
                 Console.ForegroundColor = ConsoleColor.Red;
-                engine.MonsterAttack();
-                Console.WriteLine($"The {engine.Appearing_monster.Name} attacks and deals {engine.MonsterRandomDamage(engine.Appearing_monster)}");
+                Console.WriteLine($"You have {engine.Selected_weapon.CurrentHealth} points of life.");
+                Console.WriteLine($"The {engine.Appearing_monster.Name} attacks and deals {engine.MonsterAttack()} damages.");
                 Console.WriteLine($"You still have {engine.Selected_weapon.CurrentHealth} points of life.");
                 Console.WriteLine();
                 Console.ReadKey(true);

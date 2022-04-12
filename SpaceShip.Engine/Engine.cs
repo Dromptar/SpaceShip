@@ -22,7 +22,7 @@
             new Weapon
             {
                 Name = "Laser Staff",
-                MaxHealth = 6,
+                MaxHealth = 10,
                 Armor = 12,
                 MinDamage = 1,
                 MaxDamage = 6
@@ -64,13 +64,13 @@
                 MaxDamage = 6
             }
         };
-   
 
-        public int WeaponRandomDamage(Weapon weapon)
+
+        public void GenerateMonster()
         {
-            Random rnd = new Random();
-            int Damage = rnd.Next(weapon.MinDamage, weapon.MaxDamage);
-            return Damage;
+            var rnd = new Random();
+            int index = rnd.Next(monsters_list.Count);
+            Appearing_monster = monsters_list[index];
         }
 
         public int MonsterRandomDamage(Monster monster)
@@ -80,19 +80,18 @@
             return Damage;
         }
 
-        public void GenerateMonster()
-        {
-            var rnd = new Random();
-            int index = rnd.Next(monsters_list.Count);
-            Appearing_monster = monsters_list[index];
-        }
-
-        public void MonsterAttack()
-        {
+        public int MonsterAttack()
+        { 
             Selected_weapon.CurrentHealth -= MonsterRandomDamage(Appearing_monster);
-
+            return Selected_weapon.CurrentHealth;
         }
 
+        public int WeaponRandomDamage(Weapon weapon)
+        {
+            Random rnd = new Random();
+            int Damage = rnd.Next(weapon.MinDamage, weapon.MaxDamage);
+            return Damage;
+        }
         public void WeaponAttack()
         {
             Appearing_monster.CurrentHealth -= WeaponRandomDamage(Selected_weapon);
