@@ -1,10 +1,11 @@
-﻿namespace SpaceShip_Engine
+﻿namespace SpaceShip_Project
 {
     
     public class Engine
     {
-        Weapon weapon = new Weapon();
 
+        Weapon weapon = new Weapon();
+        Monster monster = new Monster();
         public Weapon Selected_weapon { get; set; } // null
         public Monster Appearing_monster { get; set; } // null
 

@@ -1,4 +1,4 @@
-﻿namespace SpaceShip_Engine
+﻿namespace SpaceShip_Project
 {
     public class Class1
     {
