@@ -59,7 +59,9 @@ namespace SpaceShip_Engine
             Console.WriteLine($"You enter in the first room. It's dark, but you can see a big shadow in front of you. " +
                               $"Looks to be a {engine.Appearing_monster.Name}.");
             Console.WriteLine($"You grab your {engine.Selected_weapon.Name} and a violent fight takes place!");
+            Console.WriteLine();
             Console.WriteLine($"This {engine.Appearing_monster.Name} has {engine.Appearing_monster.MaxHealth} point of life.");
+            Console.WriteLine();
 
             // Starting the fight
             engine.Selected_weapon.CurrentHealth = engine.Selected_weapon.MaxHealth;

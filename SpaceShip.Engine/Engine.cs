@@ -80,7 +80,6 @@
             return Damage;
         }
 
-
         public void GenerateMonster()
         {
             var rnd = new Random();
@@ -90,13 +89,13 @@
 
         public void MonsterAttack()
         {
-            Selected_weapon.CurrentHealth = Selected_weapon.CurrentHealth - MonsterRandomDamage(Appearing_monster);
-        }
+            Selected_weapon.CurrentHealth -= MonsterRandomDamage(Appearing_monster);
 
+        }
 
         public void WeaponAttack()
         {
-            Appearing_monster.CurrentHealth = Appearing_monster.CurrentHealth - WeaponRandomDamage(Selected_weapon);
+            Appearing_monster.CurrentHealth -= WeaponRandomDamage(Selected_weapon);
 
         }
 
