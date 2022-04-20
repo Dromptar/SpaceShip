@@ -11,16 +11,23 @@ namespace SpaceShip.Front
 
     class Program 
     {
-        
+
+        static GameEngine engine = new GameEngine();
+
         static void Main()
         {
-            Menu();    
+            Menu();
+            
+            while(engine.KeepFighting())
+            {
+               Fight();
+            }
+            
         }
 
 
         static void Menu()
         {
-            GameEngine engine = new GameEngine();
 
             // Here is the menu to pick you weapon
             Console.ForegroundColor = ConsoleColor.White;
@@ -31,6 +38,7 @@ namespace SpaceShip.Front
             Console.WriteLine();
 
             Console.WriteLine("To begin, choose your profession : ");
+            Console.WriteLine();
             foreach (var profession in engine.professions_list)
             {
                 Console.WriteLine($"{engine.professions_list.IndexOf(profession) + 1}. {profession.Name}");
@@ -41,8 +49,9 @@ namespace SpaceShip.Front
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
             Console.Clear();
-            
+
             Console.WriteLine("Now, pick a weapon : ");
+            Console.WriteLine();
             foreach (var weapon in engine.weapons_list)
             {
                 Console.WriteLine($"{engine.weapons_list.IndexOf(weapon) + 1}. {weapon.Name}");
@@ -70,23 +79,28 @@ namespace SpaceShip.Front
             Console.ReadKey(true);
             Console.Clear();
 
-            //We generate a random monster and use the weapon picked up by player to start a fight
             engine.Your_profession = engine.professions_list[playerChoice1 - 1];
             engine.Selected_weapon = engine.weapons_list[playerChoice2 - 1];
+        }
+            
+
+        static void Fight()
+        {
+            
+            //We generate a random monster and use the weapon picked up by player to start a fight
             engine.GenerateMonster();
 
             Console.WriteLine($"You enter in the first room. It's dark, but you can see a big shadow in front of you. " +
-                              $"Looks to be a {engine.Appearing_monster.Name}.");
+                                $"Looks to be a {engine.Appearing_monster.Name}.");
             Console.WriteLine($"You grab your {engine.Selected_weapon.Name} and a violent fight takes place!");
-            Console.WriteLine();
             Console.WriteLine($"This {engine.Appearing_monster.Name} has {engine.Appearing_monster.MaxHealth} HP.");
             Console.WriteLine($"You have {engine.Your_profession.MaxHealth} HP.");
-            Console.WriteLine();
+            Console.ReadKey(true);
+            Console.Clear();
 
             // Starting the fight
-            engine.Your_profession.CurrentHealth = engine.Your_profession.MaxHealth;
             engine.Appearing_monster.CurrentHealth = engine.Appearing_monster.MaxHealth;
-            
+
             while (engine.Appearing_monster.CurrentHealth >= 0 || engine.Your_profession.CurrentHealth >= 0)
             {
                 // Tour du monstre
@@ -120,8 +134,10 @@ namespace SpaceShip.Front
                 }
 
             }
-            
-            Console.WriteLine();
+            Console.ReadKey(true);
+            Console.Clear();
+
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Would you like to use some item from your backpack? (O/N)");
             string input = Console.ReadLine().ToUpper();
             if (input == "O")
@@ -133,36 +149,36 @@ namespace SpaceShip.Front
                 int playerChoice3 = int.Parse(Console.ReadLine());
                 engine.Some_item = engine.items_list[playerChoice3 - 1];
 
-                switch (Console.ReadLine())
+                switch (playerChoice3)
                 {
-                    case "1":
-                    Console.WriteLine($"You use {engine.items_list[playerChoice3 - 1].Name} !" + "\n" +
-                                      $"You regen {engine.HealthPotion()} HP." + "\n" +
-                                      $"You feel better and now have {engine.Your_profession.CurrentHealth} HP");
+                    case 1:
+                        Console.WriteLine($"You use {engine.items_list[playerChoice3 - 1].Name} !" + "\n" +
+                                            $"You regen {engine.HealthPotion()} HP." + "\n" +
+                                            $"You feel better and now have {engine.Your_profession.CurrentHealth} HP");
                         break;
 
-                    case "2":
+                    case 2:
                         Console.WriteLine($"You use {engine.items_list[playerChoice3 - 1].Name} !" + "\n" +
-                                          $"You increased your armor by {engine.ArmorPotion()} points." + "\n" +
-                                          $"You feel stronger and now have {engine.Your_profession.Armor} armor score.");
+                                            $"You increased your armor by {engine.ArmorPotion()} points." + "\n" +
+                                            $"You feel stronger and now have {engine.Your_profession.Armor} armor score.");
                         break;
                 }
-                
+
             }
             else if (input == "N")
             {
                 Environment.Exit(0);
             }
-            
 
-
-
-
-
+            Console.WriteLine();
+            Console.ReadKey(true);
         }
 
 
 
-
     }
+
+
+
+
 }

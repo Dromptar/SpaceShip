@@ -150,6 +150,15 @@ namespace SpaceShip.Engine
 
         }
 
+        public bool KeepFighting()
+        {
+            Your_profession.CurrentHealth = Your_profession.MaxHealth;
+            if (Your_profession.CurrentHealth > 0)
+                return true;
+            else
+                return false;
+        }
+
         public int PotionEffect(Item item)
         {
             Random rnd = new Random();

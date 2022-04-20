@@ -16,6 +16,7 @@ namespace SpaceShip.Model
 
         public Profession()
         {
+
         }
 
 
