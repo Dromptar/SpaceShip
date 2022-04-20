@@ -6,26 +6,18 @@ using System.Threading.Tasks;
 
 namespace SpaceShip.SpaceShip.Front
 {
-    public class Weapon
+    public class Profession
     {
-
         public string Name { get; set; }
         public int MaxHealth { get; set; }
         public int CurrentHealth { get; set; }
-        public int Attack { get; set; }
         public int Armor { get; set; }
-        public int MinDamage { get; set; }
-        public int MaxDamage { get; set; }
-        
-       
-        
-        
-        public Weapon()
-        {
-            
 
+
+        public Profession()
+        {
         }
 
-      
+
     }
 }

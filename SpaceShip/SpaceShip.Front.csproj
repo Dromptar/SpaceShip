@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\Model.csproj" />
-    <ProjectReference Include="..\SpaceShip.Engine\SpaceShip_Engine.csproj" />
+    <ProjectReference Include="..\ClassLibrary1\SpaceShip.Model.csproj" />
+    <ProjectReference Include="..\SpaceShip.Engine\SpaceShip.Engine.csproj" />
   </ItemGroup>
 
 </Project>
