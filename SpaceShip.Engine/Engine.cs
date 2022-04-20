@@ -1,9 +1,10 @@
-﻿using SpaceShip.Items;
+﻿
+using SpaceShip.Model;
 
-namespace SpaceShip.SpaceShip.Front
+namespace SpaceShip.Engine
 {
     
-    public class Engine
+    public class GameEngine
     {
         public Item Some_item { get; set; }
         public Profession Your_profession { get; set; }

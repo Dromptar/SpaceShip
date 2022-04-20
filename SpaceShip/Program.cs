@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpaceShip.Engine;
 
 
-namespace SpaceShip.SpaceShip.Front
+namespace SpaceShip.Front
 {
 
     class Program 
@@ -19,7 +20,7 @@ namespace SpaceShip.SpaceShip.Front
 
         static void Menu()
         {
-            Engine engine = new Engine();
+            GameEngine engine = new GameEngine();
 
             // Here is the menu to pick you weapon
             Console.ForegroundColor = ConsoleColor.White;
