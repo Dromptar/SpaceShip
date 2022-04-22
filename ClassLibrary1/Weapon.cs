@@ -10,9 +10,6 @@ namespace SpaceShip.Model
     {
 
         public string Name { get; set; }
-        public int MaxHealth { get; set; }
-        public int CurrentHealth { get; set; }
-        public int Attack { get; set; }
         public int Armor { get; set; }
         public int MinDamage { get; set; }
         public int MaxDamage { get; set; }

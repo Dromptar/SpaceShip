@@ -99,7 +99,7 @@ namespace SpaceShip.Front
             Console.Clear();
 
             // Starting the fight
-            engine.Appearing_monster.CurrentHealth = engine.Appearing_monster.MaxHealth;
+            // engine.Appearing_monster.CurrentHealth = engine.Appearing_monster.MaxHealth;
 
             while (engine.Appearing_monster.CurrentHealth >= 0 || engine.Your_profession.CurrentHealth >= 0)
             {

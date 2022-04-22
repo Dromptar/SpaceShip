@@ -14,22 +14,22 @@ namespace SpaceShip.Engine
 
         public List<Profession> professions_list = new List<Profession>
         {
-            new Profession
+            new Profession(20, 20)
             {
                 Name = "Soldier",
-                MaxHealth = 14,
+            //  MaxHealth = 20,
                 Armor = 14
             },
-            new Profession
+            new Profession(18, 18)
             {
                 Name = "Smuggler",
-                MaxHealth = 12,
+             //   MaxHealth = 18,
                 Armor = 12
             },
-            new Profession
+            new Profession(16, 16)
             {
-                Name = "Alchimist",
-                MaxHealth = 10,
+               Name = "Alchimist",
+             //   MaxHealth = 16,
                 Armor = 10
             },
 
@@ -60,34 +60,30 @@ namespace SpaceShip.Engine
 
         public List<Monster> monsters_list = new List<Monster>
         {
-            new Monster
+            new Monster(12, 12)
             {
                 Name = "Rancor",
-                MaxHealth = 12,
                 Armor = 2,
                 MinDamage = 1,
                 MaxDamage = 6
             },
-            new Monster
+            new Monster(5, 5)
             {
                 Name = "Gretchin",
-                MaxHealth = 5,
                 Armor = 2,
                 MinDamage = 1,
                 MaxDamage = 4
             },
-            new Monster
+            new Monster(7, 7)
             {
                 Name = "Droid",
-                MaxHealth = 7,
                 Armor = 1,
                 MinDamage = 1,
                 MaxDamage = 6
             },
-            new Monster
+            new Monster(10, 10)
             {
                 Name = "Trandoshan",
-                MaxHealth = 10,
                 Armor = 1,
                 MinDamage = 1,
                 MaxDamage = 8
@@ -152,7 +148,6 @@ namespace SpaceShip.Engine
 
         public bool KeepFighting()
         {
-            Your_profession.CurrentHealth = Your_profession.MaxHealth;
             if (Your_profession.CurrentHealth > 0)
                 return true;
             else
