@@ -18,10 +18,9 @@ namespace SpaceShip.Model
 
 
 
-        public Monster(int maxHealth, int currentHealth)
+        public Monster()
         {
-            MaxHealth = maxHealth;
-            CurrentHealth = currentHealth;
+            
         }
 
     }

@@ -60,30 +60,34 @@ namespace SpaceShip.Engine
 
         public List<Monster> monsters_list = new List<Monster>
         {
-            new Monster(12, 12)
+            new Monster()
             {
                 Name = "Rancor",
+                MaxHealth = 12,
                 Armor = 2,
                 MinDamage = 1,
                 MaxDamage = 6
             },
-            new Monster(5, 5)
+            new Monster()
             {
                 Name = "Gretchin",
+                MaxHealth = 5,
                 Armor = 2,
                 MinDamage = 1,
                 MaxDamage = 4
             },
-            new Monster(7, 7)
+            new Monster()
             {
                 Name = "Droid",
+                MaxHealth = 7,
                 Armor = 1,
                 MinDamage = 1,
                 MaxDamage = 6
             },
-            new Monster(10, 10)
+            new Monster()
             {
                 Name = "Trandoshan",
+                MaxHealth = 10,
                 Armor = 1,
                 MinDamage = 1,
                 MaxDamage = 8

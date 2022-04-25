@@ -87,14 +87,15 @@ namespace SpaceShip.Front
         static void Fight()
         {
             
-            //We generate a random monster and use the weapon picked up by player to start a fight
+            // We generate a random monster and use the weapon picked up by player to start a fight
             engine.GenerateMonster();
+            engine.Appearing_monster.CurrentHealth = engine.Appearing_monster.MaxHealth;
 
             Console.WriteLine($"You enter in the first room. It's dark, but you can see a big shadow in front of you. " +
                                 $"Looks to be a {engine.Appearing_monster.Name}.");
             Console.WriteLine($"You grab your {engine.Selected_weapon.Name} and a violent fight takes place!");
             Console.WriteLine($"This {engine.Appearing_monster.Name} has {engine.Appearing_monster.MaxHealth} HP.");
-            Console.WriteLine($"You have {engine.Your_profession.MaxHealth} HP.");
+            Console.WriteLine($"You have {engine.Your_profession.CurrentHealth} HP.");
             Console.ReadKey(true);
             Console.Clear();
 
@@ -167,11 +168,10 @@ namespace SpaceShip.Front
             }
             else if (input == "N")
             {
-                Environment.Exit(0);
+                engine.KeepFighting();
             }
 
-            Console.WriteLine();
-            Console.ReadKey(true);
+            
         }
 
 
