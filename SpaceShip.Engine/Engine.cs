@@ -6,11 +6,23 @@ namespace SpaceShip.Engine
     
     public class GameEngine
     {
+        public Dice Roll_Dice { get; set; }
         public Item Some_item { get; set; }
         public Profession Your_profession { get; set; }
         public Weapon Selected_weapon { get; set; } 
         public Monster Appearing_monster { get; set; } 
 
+
+        public List<Dice> dices_list = new List<Dice>
+        {
+            new Dice()
+            {
+                Name = "D20",
+                MinScore = 1,
+                MaxScore = 20
+            }
+
+        };
 
         public List<Profession> professions_list = new List<Profession>
         {
@@ -111,7 +123,6 @@ namespace SpaceShip.Engine
                 MaxEffect = 6
             }
 
-
         };
 
         // generating a random monster before each fight
@@ -122,6 +133,45 @@ namespace SpaceShip.Engine
             Appearing_monster = monsters_list[index];
         }
 
+        //public int RandomDiceAttack()
+        //{
+        //    Random rnd = new Random();
+        //    int attack = rnd.Next(1, 20);
+        //    return attack;
+
+        //}
+        public bool CharacterAttack()
+        {
+            Random rnd = new Random();
+            int attack = rnd.Next(1, 20);
+
+            if (attack > Appearing_monster.Armor)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public Dice MonsterAttack(Dice dice)
+        {
+            Random rnd = new Random();
+            int attack = rnd.Next(dice.MinScore, dice.MaxScore);
+
+            //var score = new Dice();
+            
+            if (attack > Your_profession.Armor)
+            {
+                return dice;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
 
         public int MonsterRandomDamage(Monster monster)
         {
@@ -129,7 +179,8 @@ namespace SpaceShip.Engine
             int Damage = rnd.Next(monster.MinDamage, monster.MaxDamage);
             return Damage;
         }
-        public int MonsterAttack()
+
+        public int MonsterDamage()
         {         
             int Damage = MonsterRandomDamage(Appearing_monster);
             Your_profession.CurrentHealth -= Damage;
@@ -142,7 +193,7 @@ namespace SpaceShip.Engine
             int Damage = rnd.Next(weapon.MinDamage, weapon.MaxDamage);
             return Damage;
         }
-        public int WeaponAttack()
+        public int WeaponDamage()
         {
             int Damage = WeaponRandomDamage(Selected_weapon);
             Appearing_monster.CurrentHealth -= Damage;
@@ -178,7 +229,6 @@ namespace SpaceShip.Engine
             Your_profession.Armor += increaseArmor;
             return increaseArmor;
         }
-
 
 
 

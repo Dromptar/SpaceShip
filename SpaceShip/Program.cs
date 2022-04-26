@@ -106,8 +106,16 @@ namespace SpaceShip.Front
             {
                 // Tour du monstre
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"The {engine.Appearing_monster.Name} attacks and deals {engine.MonsterAttack()} damages.");
-                Console.WriteLine($"You still have {engine.Your_profession.CurrentHealth} HP.");
+                Console.WriteLine($"You have {engine.Your_profession.Armor} of defense. {engine.Appearing_monster.Name} attacks and scores {engine.MonsterAttack()}.");
+                if (engine.MonsterAttack())
+                {
+                    Console.WriteLine($"The creature hurts you and you lose {engine.MonsterDamage()} Hp.");
+                    Console.WriteLine($"You still have {engine.Your_profession.CurrentHealth} HP.");
+                }
+                else
+                {
+                    Console.WriteLine("Missed!");
+                }
                 Console.WriteLine();
                 Console.ReadKey(true);
 
@@ -121,7 +129,7 @@ namespace SpaceShip.Front
 
                 // Tour du joueur
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"You beat the creature and deals {engine.WeaponAttack()} damages!");
+                Console.WriteLine($"You beat the creature and deals {engine.WeaponDamage()} damages!");
                 Console.WriteLine($"The {engine.Appearing_monster.Name} still have {engine.Appearing_monster.CurrentHealth} HP.");
                 Console.WriteLine();
                 Console.ReadKey(true);
