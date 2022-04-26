@@ -168,7 +168,7 @@ namespace SpaceShip.Engine
             }
             else
             {
-                return false;
+                return dice;
             }
             
         }

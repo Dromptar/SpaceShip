@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\SpaceShip.Model.csproj" />
+    <ProjectReference Include="..\SpaceShip.Model\SpaceShip.Model.csproj" />
   </ItemGroup>
 
 </Project>
