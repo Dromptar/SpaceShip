@@ -91,7 +91,7 @@ namespace SpaceShip.Front
             engine.GenerateMonster();
             engine.Appearing_monster.CurrentHealth = engine.Appearing_monster.MaxHealth;
 
-            Console.WriteLine($"You enter in the first room. It's dark, but you can see a big shadow in front of you. " +
+            Console.WriteLine($"You enter in the room. It's dark, but you can see a big shadow in front of you. " +
                                 $"Looks to be a {engine.Appearing_monster.Name}.");
             Console.WriteLine($"You grab your {engine.Selected_weapon.Name} and a violent fight takes place!");
             Console.WriteLine($"This {engine.Appearing_monster.Name} has {engine.Appearing_monster.MaxHealth} HP.");
@@ -128,7 +128,7 @@ namespace SpaceShip.Front
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("You received a huge strike over the head.");
                     Console.WriteLine("Game Over");
-                    break;
+                    Environment.Exit(0);
                 }
 
                 // Tour du joueur

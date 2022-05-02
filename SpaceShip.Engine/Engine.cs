@@ -6,23 +6,13 @@ namespace SpaceShip.Engine
     
     public class GameEngine
     {
-        //public Dice Some_Dice { get; set; }
-        //public DiceResult Roll_Dice { get; set; }
+
         public Item Some_item { get; set; }
         public Profession Your_profession { get; set; }
         public Weapon Selected_weapon { get; set; } 
         public Monster Appearing_monster { get; set; } 
 
 
-        public List<Dice> dices_list = new List<Dice>
-        {
-            new Dice()
-            {
-                Name = "D20",
-                MaxScore = 20
-            }
-
-        };
 
         public List<Profession> professions_list = new List<Profession>
         {
@@ -30,19 +20,22 @@ namespace SpaceShip.Engine
             {
                 Name = "Soldier",
             //  MaxHealth = 20,
-                Armor = 14
+                Armor = 14,
+                Attack = 2
             },
             new Profession(18, 18)
             {
                 Name = "Smuggler",
-             //   MaxHealth = 18,
-                Armor = 12
+             // MaxHealth = 18,
+                Armor = 12,
+                Attack = 4
             },
             new Profession(16, 16)
             {
-               Name = "Alchimist",
-             //   MaxHealth = 16,
-                Armor = 10
+                Name = "Alchimist",
+                //MaxHealth = 16,
+                Armor = 10,
+                Attack = 6
             },
 
         };
@@ -76,9 +69,9 @@ namespace SpaceShip.Engine
             {
                 Name = "Rancor",
                 MaxHealth = 14,
-                Armor = 2,
+                Armor = 13,
                 MinDamage = 1,
-                MaxDamage = 6
+                MaxDamage = 6,
             },
             new Monster()
             {
@@ -133,35 +126,19 @@ namespace SpaceShip.Engine
             Appearing_monster = monsters_list[index];
         }
 
-        public DiceResult RollDice(int maxScore, int tresHold)
-        {
-            Dice dice = dices_list.First(x => x.MaxScore == maxScore);
-            Random rnd = new Random();
-            int result = rnd.Next(1, maxScore);
-            bool touched = result > tresHold;
-            DiceResult Roll_Dice = new DiceResult();
-            Roll_Dice.Dice = dice;
-            Roll_Dice.Score = result;
-            Roll_Dice.Success = touched;
-
-            return Roll_Dice;
-        }
-
         public DiceResult MonsterAttack()
         {
-            DiceResult roll = RollDice(20, Your_profession.Armor);
-
+            DicesManager Some_Dice = new DicesManager();
+            DiceResult roll = Some_Dice.RollDice(20, Your_profession.Armor);
             return roll;
         }
 
         public DiceResult CharacterAttack()
         {
-            DiceResult roll = RollDice(20, Appearing_monster.Armor);
-
+            DicesManager Some_Dice = new DicesManager();
+            DiceResult roll = Some_Dice.RollDice(20, Appearing_monster.Armor);
             return roll;
         }
-    
-
 
         public int MonsterRandomDamage(Monster monster)
         {

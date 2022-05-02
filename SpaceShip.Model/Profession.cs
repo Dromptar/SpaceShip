@@ -12,6 +12,7 @@ namespace SpaceShip.Model
         public int MaxHealth { get; set; }
         public int CurrentHealth { get; set; }
         public int Armor { get; set; }
+        public int Attack { get; set; }
 
 
         public Profession(int maxHealth, int currentHealth)
