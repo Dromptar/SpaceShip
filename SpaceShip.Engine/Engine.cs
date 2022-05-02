@@ -6,7 +6,8 @@ namespace SpaceShip.Engine
     
     public class GameEngine
     {
-        public Dice Roll_Dice { get; set; }
+        //public Dice Some_Dice { get; set; }
+        //public DiceResult Roll_Dice { get; set; }
         public Item Some_item { get; set; }
         public Profession Your_profession { get; set; }
         public Weapon Selected_weapon { get; set; } 
@@ -18,7 +19,6 @@ namespace SpaceShip.Engine
             new Dice()
             {
                 Name = "D20",
-                MinScore = 1,
                 MaxScore = 20
             }
 
@@ -75,7 +75,7 @@ namespace SpaceShip.Engine
             new Monster()
             {
                 Name = "Rancor",
-                MaxHealth = 12,
+                MaxHealth = 14,
                 Armor = 2,
                 MinDamage = 1,
                 MaxDamage = 6
@@ -84,7 +84,7 @@ namespace SpaceShip.Engine
             {
                 Name = "Gretchin",
                 MaxHealth = 5,
-                Armor = 2,
+                Armor = 8,
                 MinDamage = 1,
                 MaxDamage = 4
             },
@@ -92,7 +92,7 @@ namespace SpaceShip.Engine
             {
                 Name = "Droid",
                 MaxHealth = 7,
-                Armor = 1,
+                Armor = 10,
                 MinDamage = 1,
                 MaxDamage = 6
             },
@@ -100,7 +100,7 @@ namespace SpaceShip.Engine
             {
                 Name = "Trandoshan",
                 MaxHealth = 10,
-                Armor = 1,
+                Armor = 12,
                 MinDamage = 1,
                 MaxDamage = 8
             }
@@ -133,45 +133,35 @@ namespace SpaceShip.Engine
             Appearing_monster = monsters_list[index];
         }
 
-        //public int RandomDiceAttack()
-        //{
-        //    Random rnd = new Random();
-        //    int attack = rnd.Next(1, 20);
-        //    return attack;
-
-        //}
-        public bool CharacterAttack()
+        public DiceResult RollDice(int maxScore, int tresHold)
         {
+            Dice dice = dices_list.First(x => x.MaxScore == maxScore);
             Random rnd = new Random();
-            int attack = rnd.Next(1, 20);
+            int result = rnd.Next(1, maxScore);
+            bool touched = result > tresHold;
+            DiceResult Roll_Dice = new DiceResult();
+            Roll_Dice.Dice = dice;
+            Roll_Dice.Score = result;
+            Roll_Dice.Success = touched;
 
-            if (attack > Appearing_monster.Armor)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return Roll_Dice;
         }
 
-        public Dice MonsterAttack(Dice dice)
+        public DiceResult MonsterAttack()
         {
-            Random rnd = new Random();
-            int attack = rnd.Next(dice.MinScore, dice.MaxScore);
+            DiceResult roll = RollDice(20, Your_profession.Armor);
 
-            //var score = new Dice();
-            
-            if (attack > Your_profession.Armor)
-            {
-                return dice;
-            }
-            else
-            {
-                return dice;
-            }
-            
+            return roll;
         }
+
+        public DiceResult CharacterAttack()
+        {
+            DiceResult roll = RollDice(20, Appearing_monster.Armor);
+
+            return roll;
+        }
+    
+
 
         public int MonsterRandomDamage(Monster monster)
         {

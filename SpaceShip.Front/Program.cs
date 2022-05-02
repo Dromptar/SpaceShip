@@ -105,9 +105,13 @@ namespace SpaceShip.Front
             while (engine.Appearing_monster.CurrentHealth >= 0 || engine.Your_profession.CurrentHealth >= 0)
             {
                 // Tour du monstre
+               
+                var MonsterAttack = engine.MonsterAttack();
+                var CharacterAttack = engine.CharacterAttack();
+                
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"You have {engine.Your_profession.Armor} of defense. {engine.Appearing_monster.Name} attacks and scores {engine.MonsterAttack()}.");
-                if (engine.MonsterAttack())
+                Console.WriteLine($"You have {engine.Your_profession.Armor} of defense. {engine.Appearing_monster.Name} attacks and scores {MonsterAttack.Score}.");
+                if (MonsterAttack.Success)
                 {
                     Console.WriteLine($"The creature hurts you and you lose {engine.MonsterDamage()} Hp.");
                     Console.WriteLine($"You still have {engine.Your_profession.CurrentHealth} HP.");
@@ -129,8 +133,16 @@ namespace SpaceShip.Front
 
                 // Tour du joueur
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"You beat the creature and deals {engine.WeaponDamage()} damages!");
-                Console.WriteLine($"The {engine.Appearing_monster.Name} still have {engine.Appearing_monster.CurrentHealth} HP.");
+                Console.WriteLine($"The {engine.Appearing_monster.Name} has {engine.Appearing_monster.Armor} of defense. You attack and score {CharacterAttack.Score}.");
+                if (CharacterAttack.Success)
+                {
+                    Console.WriteLine($"You beat the creature and deals {engine.WeaponDamage()} damages!");
+                    Console.WriteLine($"The {engine.Appearing_monster.Name} still have {engine.Appearing_monster.CurrentHealth} HP.");
+                }
+                else
+                {
+                    Console.WriteLine("Missed!");
+                }
                 Console.WriteLine();
                 Console.ReadKey(true);
 

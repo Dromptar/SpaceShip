@@ -6,19 +6,16 @@ using System.Threading.Tasks;
 
 namespace SpaceShip.Model
 {
-    public class Dice
+    public class DiceResult
     {
-        public string Name { get; set; }
-        public int MaxScore { get; set; }
+        public Dice Dice { get; set; }
+        public int Score { get; set; }
+        public bool Success { get; set; }
 
-        public Dice()
+        public DiceResult()
         {
 
         }
 
-
-
     }
-
-    
 }
