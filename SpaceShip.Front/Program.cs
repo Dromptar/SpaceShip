@@ -13,6 +13,8 @@ namespace SpaceShip.Front
     {
 
         static GameEngine engine = new GameEngine();
+        static InputManager inputManager = new InputManager();
+
 
         static void Main()
         {
@@ -43,9 +45,11 @@ namespace SpaceShip.Front
             {
                 Console.WriteLine($"{engine.ProfessionsList.IndexOf(profession) + 1}. {profession.Name}");
             }
-            int playerChoice1 = int.Parse(Console.ReadLine());
-            Console.WriteLine($"You are a {engine.ProfessionsList[playerChoice1 - 1].Name} !" + "\n" +
-                              $"The {engine.ProfessionsList[playerChoice1 - 1].Name} offers you {engine.ProfessionsList[playerChoice1 - 1].MaxHealth} HP and {engine.ProfessionsList[playerChoice1 - 1].Armor} of protection. ");
+
+            int playerChoice = inputManager.GetPlayerIntegerChoice();
+
+            Console.WriteLine($"You are a {engine.ProfessionsList[playerChoice - 1].Name} !" + "\n" +
+                              $"The {engine.ProfessionsList[playerChoice - 1].Name} offers you {engine.ProfessionsList[playerChoice - 1].MaxHealth} HP and {engine.ProfessionsList[playerChoice - 1].Armor} of protection. ");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
             Console.Clear();
@@ -58,7 +62,7 @@ namespace SpaceShip.Front
             }
 
             // When weapon is picked, we give some information to player
-            int playerChoice2 = int.Parse(Console.ReadLine());
+            int playerChoice2 = inputManager.GetPlayerIntegerChoice();
             Console.WriteLine($"You picked {engine.WeaponsList[playerChoice2 - 1].Name} !" + "\n" +
                               $"It's a powerful ally which deals between {engine.WeaponsList[playerChoice2 - 1].MinDamage} and {engine.WeaponsList[playerChoice2 - 1].MaxDamage} damages to an eventual target. ");
             Console.WriteLine();
@@ -74,12 +78,12 @@ namespace SpaceShip.Front
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
             Console.WriteLine();
-            Console.WriteLine($"Now , be brave and proud young {engine.ProfessionsList[playerChoice1 - 1].Name} and let's fight the evil of the lost Spaceship with your new {engine.WeaponsList[playerChoice2 - 1].Name} ..." + "\n" +
+            Console.WriteLine($"Now , be brave and proud young {engine.ProfessionsList[playerChoice - 1].Name} and let's fight the evil of the lost Spaceship with your new {engine.WeaponsList[playerChoice2 - 1].Name} ..." + "\n" +
                 $"Ready?");
             Console.ReadKey(true);
             Console.Clear();
 
-            engine.YourProfession = engine.ProfessionsList[playerChoice1 - 1];
+            engine.YourProfession = engine.ProfessionsList[playerChoice - 1];
             engine.SelectedWeapon = engine.WeaponsList[playerChoice2 - 1];
         }
             
@@ -160,14 +164,14 @@ namespace SpaceShip.Front
 
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Would you like to use some item from your backpack? (O/N)");
-            string input = Console.ReadLine().ToUpper();
+            string input = inputManager.GetPlayerStringChoice().ToUpper();
             if (input == "O")
             {
                 foreach (var item in engine.ItemsList)
                 {
                     Console.WriteLine($"{engine.ItemsList.IndexOf(item) + 1}. {item.Name}");
                 }
-                int playerChoice3 = int.Parse(Console.ReadLine());
+                int playerChoice3 = inputManager.GetPlayerIntegerChoice();
                 engine.SomeItem = engine.ItemsList[playerChoice3 - 1];
 
                 switch (playerChoice3)
