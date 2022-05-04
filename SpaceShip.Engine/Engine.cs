@@ -6,15 +6,13 @@ namespace SpaceShip.Engine
     
     public class GameEngine
     {
+        public Item SomeItem { get; set; }
+        public Profession YourProfession { get; set; }
+        public Weapon SelectedWeapon { get; set; } 
+        public Monster AppearingMonster { get; set; }
+        public DicesManager DicesManager { get; set; }
 
-        public Item Some_item { get; set; }
-        public Profession Your_profession { get; set; }
-        public Weapon Selected_weapon { get; set; } 
-        public Monster Appearing_monster { get; set; } 
-
-
-
-        public List<Profession> professions_list = new List<Profession>
+        public List<Profession> ProfessionsList = new List<Profession>
         {
             new Profession(20, 20)
             {
@@ -40,7 +38,7 @@ namespace SpaceShip.Engine
 
         };
 
-        public List<Weapon> weapons_list = new List<Weapon>
+        public List<Weapon> WeaponsList = new List<Weapon>
         {
 
             new Weapon
@@ -63,7 +61,7 @@ namespace SpaceShip.Engine
             }
         };
 
-        public List<Monster> monsters_list = new List<Monster>
+        public List<Monster> MonstersList = new List<Monster>
         {
             new Monster()
             {
@@ -103,7 +101,7 @@ namespace SpaceShip.Engine
             }
         };
 
-        public List<Item> items_list = new List<Item>
+        public List<Item> ItemsList = new List<Item>
         {
             new Item
             {
@@ -122,59 +120,62 @@ namespace SpaceShip.Engine
 
         };
 
+        public GameEngine()
+        {
+            DicesManager = new DicesManager();
+        }
+
         // generating a random monster before each fight
         public void GenerateMonster()
         {
             var rnd = new Random();
-            int index = rnd.Next(monsters_list.Count);
-            Appearing_monster = monsters_list[index];
+            int index = rnd.Next(MonstersList.Count);
+            AppearingMonster = MonstersList[index];
         }
 
         public DiceResult MonsterAttack()
         {
-            DicesManager Some_Dice = new DicesManager();
-            DiceResult roll = Some_Dice.RollDice(20, Your_profession.Armor, Appearing_monster.Attack);
+            DiceResult roll = DicesManager.RollDice(20, YourProfession.Armor, AppearingMonster.Attack);
             return roll;
         }
 
         public DiceResult CharacterAttack()
         {
-            DicesManager Some_Dice = new DicesManager();
-            DiceResult roll = Some_Dice.RollDice(20, Appearing_monster.Armor, Your_profession.Attack);
+            DiceResult roll = DicesManager.RollDice(20, AppearingMonster.Armor, YourProfession.Attack);
             return roll;
         }
 
         public int MonsterRandomDamage(Monster monster)
         {
             Random rnd = new Random();
-            int Damage = rnd.Next(monster.MinDamage, monster.MaxDamage);
-            return Damage;
+            int damage = rnd.Next(monster.MinDamage, monster.MaxDamage);
+            return damage;
         }
 
         public int MonsterDamage()
         {         
-            int Damage = MonsterRandomDamage(Appearing_monster);
-            Your_profession.CurrentHealth -= Damage;
-            return Damage;
+            int damage = MonsterRandomDamage(AppearingMonster);
+            YourProfession.CurrentHealth -= damage;
+            return damage;
         }
 
         public int WeaponRandomDamage(Weapon weapon)
         {
             Random rnd = new Random();
-            int Damage = rnd.Next(weapon.MinDamage, weapon.MaxDamage);
-            return Damage;
+            int damage = rnd.Next(weapon.MinDamage, weapon.MaxDamage);
+            return damage;
         }
         public int WeaponDamage()
         {
-            int Damage = WeaponRandomDamage(Selected_weapon);
-            Appearing_monster.CurrentHealth -= Damage;
-            return Damage;
+            int damage = WeaponRandomDamage(SelectedWeapon);
+            AppearingMonster.CurrentHealth -= damage;
+            return damage;
 
         }
 
         public bool KeepFighting()
         {
-            if (Your_profession.CurrentHealth > 0)
+            if (YourProfession.CurrentHealth > 0)
                 return true;
             else
                 return false;
@@ -189,19 +190,16 @@ namespace SpaceShip.Engine
 
         public int HealthPotion()
         {
-            int regainLife = PotionEffect(Some_item);
-            Your_profession.CurrentHealth += regainLife;
+            int regainLife = PotionEffect(SomeItem);
+            YourProfession.CurrentHealth += regainLife;
             return regainLife;
         }
 
         public int ArmorPotion()
         {
-            int increaseArmor = PotionEffect(Some_item);
-            Your_profession.Armor += increaseArmor;
+            int increaseArmor = PotionEffect(SomeItem);
+            YourProfession.Armor += increaseArmor;
             return increaseArmor;
         }
-
-
-
     }
 }
