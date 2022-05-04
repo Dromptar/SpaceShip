@@ -72,6 +72,7 @@ namespace SpaceShip.Engine
                 Armor = 13,
                 MinDamage = 1,
                 MaxDamage = 6,
+                Attack = 4
             },
             new Monster()
             {
@@ -79,7 +80,8 @@ namespace SpaceShip.Engine
                 MaxHealth = 5,
                 Armor = 8,
                 MinDamage = 1,
-                MaxDamage = 4
+                MaxDamage = 4,
+                Attack = 1
             },
             new Monster()
             {
@@ -87,7 +89,8 @@ namespace SpaceShip.Engine
                 MaxHealth = 7,
                 Armor = 10,
                 MinDamage = 1,
-                MaxDamage = 6
+                MaxDamage = 6,
+                Attack = 2
             },
             new Monster()
             {
@@ -95,7 +98,8 @@ namespace SpaceShip.Engine
                 MaxHealth = 10,
                 Armor = 12,
                 MinDamage = 1,
-                MaxDamage = 8
+                MaxDamage = 8,
+                Attack = 3
             }
         };
 
@@ -129,14 +133,14 @@ namespace SpaceShip.Engine
         public DiceResult MonsterAttack()
         {
             DicesManager Some_Dice = new DicesManager();
-            DiceResult roll = Some_Dice.RollDice(20, Your_profession.Armor);
+            DiceResult roll = Some_Dice.RollDice(20, Your_profession.Armor, Appearing_monster.Attack);
             return roll;
         }
 
         public DiceResult CharacterAttack()
         {
             DicesManager Some_Dice = new DicesManager();
-            DiceResult roll = Some_Dice.RollDice(20, Appearing_monster.Armor);
+            DiceResult roll = Some_Dice.RollDice(20, Appearing_monster.Armor, Your_profession.Attack);
             return roll;
         }
 

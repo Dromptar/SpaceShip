@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 namespace SpaceShip.Model
 {
     public class DicesManager
-    { 
-        public int Bonus { get; set; }
-        public Profession Your_profession { get; set; }
-
+    {
         public List<Dice> dices_list = new List<Dice>
         {
             new Dice()
@@ -20,13 +17,12 @@ namespace SpaceShip.Model
             }
         };
 
-        public DiceResult RollDice(int maxScore, int tresHold)
+        public DiceResult RollDice(int maxScore, int tresHold, int bonus)
         {
             Random rnd = new Random();
-            
             DiceResult Roll_Dice = new DiceResult();
-            Dice dice = dices_list.First(x => x.MaxScore == maxScore);  
-            int result = rnd.Next(1, maxScore) + Bonus;
+            Dice dice = dices_list.First(x => x.MaxScore == maxScore);
+            int result = rnd.Next(1, maxScore) + bonus;
             bool touched = result > tresHold;
 
             Roll_Dice.Dice = dice;
@@ -38,7 +34,7 @@ namespace SpaceShip.Model
 
         public DicesManager()
         {
-            Bonus = Your_profession.Attack;
+            
         }
 
 
