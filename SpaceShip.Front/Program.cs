@@ -47,9 +47,12 @@ namespace SpaceShip.Front
             }
 
             int playerChoice = inputManager.GetPlayerIntegerChoice();
+                    
 
             Console.WriteLine($"You are a {engine.ProfessionsList[playerChoice - 1].Name} !" + "\n" +
                               $"The {engine.ProfessionsList[playerChoice - 1].Name} offers you {engine.ProfessionsList[playerChoice - 1].MaxHealth} HP and {engine.ProfessionsList[playerChoice - 1].Armor} of protection. ");
+               
+
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
             Console.Clear();
@@ -83,7 +86,7 @@ namespace SpaceShip.Front
             Console.ReadKey(true);
             Console.Clear();
 
-            engine.YourProfession = engine.ProfessionsList[playerChoice - 1];
+            engine.YourCharacter = engine.ProfessionsList[playerChoice - 1];
             engine.SelectedWeapon = engine.WeaponsList[playerChoice2 - 1];
         }
             
@@ -99,14 +102,14 @@ namespace SpaceShip.Front
                                 $"Looks to be a {engine.AppearingMonster.Name}.");
             Console.WriteLine($"You grab your {engine.SelectedWeapon.Name} and a violent fight takes place!");
             Console.WriteLine($"This {engine.AppearingMonster.Name} has {engine.AppearingMonster.MaxHealth} HP.");
-            Console.WriteLine($"You have {engine.YourProfession.CurrentHealth} HP.");
+            Console.WriteLine($"You have {engine.YourCharacter.CurrentHealth} HP.");
             Console.ReadKey(true);
             Console.Clear();
 
             // Starting the fight
             // engine.Appearing_monster.CurrentHealth = engine.Appearing_monster.MaxHealth;
 
-            while (engine.AppearingMonster.CurrentHealth >= 0 || engine.YourProfession.CurrentHealth >= 0)
+            while (engine.AppearingMonster.CurrentHealth >= 0 || engine.YourCharacter.CurrentHealth >= 0)
             {
                 // Tour du monstre
                
@@ -114,11 +117,11 @@ namespace SpaceShip.Front
                 var CharacterAttack = engine.CharacterAttack();
                 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"You have {engine.YourProfession.Armor} of defense. {engine.AppearingMonster.Name} attacks and scores {MonsterAttack.Score}.");
+                Console.WriteLine($"You have {engine.YourCharacter.Armor} of defense. {engine.AppearingMonster.Name} attacks and scores {MonsterAttack.Score}.");
                 if (MonsterAttack.Success)
                 {
                     Console.WriteLine($"The creature hurts you and you lose {engine.MonsterDamage()} Hp.");
-                    Console.WriteLine($"You still have {engine.YourProfession.CurrentHealth} HP.");
+                    Console.WriteLine($"You still have {engine.YourCharacter.CurrentHealth} HP.");
                 }
                 else
                 {
@@ -127,7 +130,7 @@ namespace SpaceShip.Front
                 Console.WriteLine();
                 Console.ReadKey(true);
 
-                if (engine.YourProfession.CurrentHealth <= 0)
+                if (engine.YourCharacter.CurrentHealth <= 0)
                 {
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("You received a huge strike over the head.");
@@ -154,7 +157,7 @@ namespace SpaceShip.Front
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"The {engine.AppearingMonster.Name} is dead. Congratulation! You won the fight!");
-                    Console.WriteLine($"You still have {engine.YourProfession.CurrentHealth} HP after the fight.");
+                    Console.WriteLine($"You still have {engine.YourCharacter.CurrentHealth} HP after the fight.");
                     break;
                 }
 
@@ -179,13 +182,13 @@ namespace SpaceShip.Front
                     case 1:
                         Console.WriteLine($"You use {engine.ItemsList[playerChoice3 - 1].Name} !" + "\n" +
                                             $"You regen {engine.HealthPotion()} HP." + "\n" +
-                                            $"You feel better and now have {engine.YourProfession.CurrentHealth} HP");
+                                            $"You feel better and now have {engine.YourCharacter.CurrentHealth} HP");
                         break;
 
                     case 2:
                         Console.WriteLine($"You use {engine.ItemsList[playerChoice3 - 1].Name} !" + "\n" +
                                             $"You increased your armor by {engine.ArmorPotion()} points." + "\n" +
-                                            $"You feel stronger and now have {engine.YourProfession.Armor} armor score.");
+                                            $"You feel stronger and now have {engine.YourCharacter.Armor} armor score.");
                         break;
                 }
 

@@ -7,7 +7,7 @@ namespace SpaceShip.Engine
     public class GameEngine
     {
         public Item SomeItem { get; set; }
-        public Profession YourProfession { get; set; }
+        public Profession YourCharacter { get; set; }
         public Weapon SelectedWeapon { get; set; } 
         public Monster AppearingMonster { get; set; }
         public DicesManager DicesManager { get; set; }
@@ -120,7 +120,7 @@ namespace SpaceShip.Engine
 
         };
 
-        public GameEngine()
+        public GameEngine() // constructor
         {
             DicesManager = new DicesManager();
         }
@@ -135,13 +135,13 @@ namespace SpaceShip.Engine
 
         public DiceResult MonsterAttack()
         {
-            DiceResult roll = DicesManager.RollDice(20, YourProfession.Armor, AppearingMonster.Attack);
+            DiceResult roll = DicesManager.RollDice(20, YourCharacter.Armor, AppearingMonster.Attack);
             return roll;
         }
 
         public DiceResult CharacterAttack()
         {
-            DiceResult roll = DicesManager.RollDice(20, AppearingMonster.Armor, YourProfession.Attack);
+            DiceResult roll = DicesManager.RollDice(20, AppearingMonster.Armor, YourCharacter.Attack);
             return roll;
         }
 
@@ -155,7 +155,7 @@ namespace SpaceShip.Engine
         public int MonsterDamage()
         {         
             int damage = MonsterRandomDamage(AppearingMonster);
-            YourProfession.CurrentHealth -= damage;
+            YourCharacter.CurrentHealth -= damage;
             return damage;
         }
 
@@ -175,7 +175,7 @@ namespace SpaceShip.Engine
 
         public bool KeepFighting()
         {
-            if (YourProfession.CurrentHealth > 0)
+            if (YourCharacter.CurrentHealth > 0)
                 return true;
             else
                 return false;
@@ -191,14 +191,14 @@ namespace SpaceShip.Engine
         public int HealthPotion()
         {
             int regainLife = PotionEffect(SomeItem);
-            YourProfession.CurrentHealth += regainLife;
+            YourCharacter.CurrentHealth += regainLife;
             return regainLife;
         }
 
         public int ArmorPotion()
         {
             int increaseArmor = PotionEffect(SomeItem);
-            YourProfession.Armor += increaseArmor;
+            YourCharacter.Armor += increaseArmor;
             return increaseArmor;
         }
     }
