@@ -167,8 +167,8 @@ namespace SpaceShip.Front
 
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Would you like to use some item from your backpack? (O/N)");
-            string input = inputManager.GetPlayerStringChoice().ToUpper();
-            if (input == "O")
+            string playerChoice4 = inputManager.GetPlayerStringChoice().ToUpper();
+            if (playerChoice4 == "O")
             {
                 foreach (var item in engine.ItemsList)
                 {
@@ -193,7 +193,7 @@ namespace SpaceShip.Front
                 }
 
             }
-            else if (input == "N")
+            else if (playerChoice4 == "N")
             {
                 engine.KeepFighting();
             }

@@ -16,14 +16,16 @@ namespace SpaceShip.Front
             int number;
             string value = Console.ReadLine();
             bool success = int.TryParse(value, out number);
-            while (!success)
+            while (!success )
             {
                 Console.WriteLine($"{value} is not a number. Please try again.");
                 // offer again posibility to choice
-                break;
+                value = Console.ReadLine();
+                success = int.TryParse(value, out number);
+
+
             }
-            return number;
-             
+                return number;  
         }
 
 
