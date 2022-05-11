@@ -46,7 +46,8 @@ namespace SpaceShip.Front
                 Console.WriteLine($"{engine.ProfessionsList.IndexOf(profession) + 1}. {profession.Name}");
             }
 
-            int playerChoice = inputManager.GetPlayerIntegerChoice();
+            
+            int playerChoice = inputManager.GetPlayerIntegerChoice(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)).ToList());
                     
 
             Console.WriteLine($"You are a {engine.ProfessionsList[playerChoice - 1].Name} !" + "\n" +
