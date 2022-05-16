@@ -29,7 +29,7 @@ namespace SpaceShip.Front
         //        return number;  
         //}
 
-        public int GetPlayerIntegerChoice(List<int> acceptableValues)
+        public int GetPlayerInteger(List<int> acceptableValues)
         {
             int number;
             bool isValueANumber;
@@ -57,12 +57,32 @@ namespace SpaceShip.Front
         }
 
 
-        public string GetPlayerStringChoice()
+        public string GetPlayerString(int minLength, int maxLength)
         {
-            string input = Console.ReadLine();
-            return input;
+            string value;
+
+            do
+            {
+                value = Console.ReadLine();
+
+                if (value.Length <= minLength)
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine($"Invalid entry. Needs to contain between 2 and 30 caracters. Please type again.");
+                }
+                else if (value.Length >= maxLength)
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine($"Invalid entry. Needs to contain between 2 and 30 caracters. Please type again.");
+                }
+
+            }
+            while (value.Length <= minLength || value.Length >= maxLength);
+
+            return value;
         }
-
-
     }
-}
+
+
+ }
+

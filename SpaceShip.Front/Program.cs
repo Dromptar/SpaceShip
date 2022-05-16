@@ -39,7 +39,12 @@ namespace SpaceShip.Front
             Console.ReadKey(true);
             Console.WriteLine();
 
-            Console.WriteLine("To begin, choose your profession : ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("To begin, what is your name ? ");
+            string playerName= inputManager.GetPlayerString(2, 30);
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Hi {playerName}. Choose your profession : ");
             Console.WriteLine();
             foreach (var profession in engine.ProfessionsList)
             {
@@ -47,7 +52,7 @@ namespace SpaceShip.Front
             }
 
             
-            int playerChoice = inputManager.GetPlayerIntegerChoice(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)+1).ToList());
+            int playerChoice = inputManager.GetPlayerInteger(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)+1).ToList());
                     
 
             Console.WriteLine($"You are a {engine.ProfessionsList[playerChoice - 1].Name} !" + "\n" +
@@ -66,7 +71,7 @@ namespace SpaceShip.Front
             }
 
             // When weapon is picked, we give some information to player
-            int playerChoice2 = inputManager.GetPlayerIntegerChoice(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)).ToList());
+            int playerChoice2 = inputManager.GetPlayerInteger(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)).ToList());
             
             Console.WriteLine($"You picked {engine.WeaponsList[playerChoice2 - 1].Name} !" + "\n" +
                               $"It's a powerful ally which deals between {engine.WeaponsList[playerChoice2 - 1].MinDamage} and {engine.WeaponsList[playerChoice2 - 1].MaxDamage} damages to an eventual target. ");
@@ -169,14 +174,14 @@ namespace SpaceShip.Front
 
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Would you like to use some item from your backpack? (O/N)");
-            string playerChoice4 = inputManager.GetPlayerStringChoice().ToUpper();
+            string playerChoice4 = inputManager.GetPlayerString(1,50).ToUpper();
             if (playerChoice4 == "O")
             {
                 foreach (var item in engine.ItemsList)
                 {
                     Console.WriteLine($"{engine.ItemsList.IndexOf(item) + 1}. {item.Name}");
                 }
-                int playerChoice3 = inputManager.GetPlayerIntegerChoice(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)).ToList());
+                int playerChoice3 = inputManager.GetPlayerInteger(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)).ToList());
                 engine.SomeItem = engine.ItemsList[playerChoice3 - 1];
 
                 switch (playerChoice3)
