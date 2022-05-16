@@ -12,28 +12,40 @@ namespace SpaceShip.Engine
         public Monster AppearingMonster { get; set; }
         public DicesManager DicesManager { get; set; }
 
-        public List<Profession> ProfessionsList = new List<Profession>
+        public List<Profession> ProfessionsList 
+        { 
+            get
+            {
+                return professionsList.Where(pro => pro.IsActive).ToList();
+            }
+
+        }
+
+        private List<Profession> professionsList = new List<Profession>
         {
             new Profession(20, 20)
             {
                 Name = "Soldier",
             //  MaxHealth = 20,
                 Armor = 14,
-                Attack = 2
+                Attack = 2,
+                IsActive = true
             },
             new Profession(18, 18)
             {
                 Name = "Smuggler",
              // MaxHealth = 18,
                 Armor = 12,
-                Attack = 4
+                Attack = 4,
+                IsActive = false
             },
             new Profession(16, 16)
             {
                 Name = "Alchimist",
                 //MaxHealth = 16,
                 Armor = 10,
-                Attack = 6
+                Attack = 6,
+                IsActive = true
             },
 
         };

@@ -47,7 +47,7 @@ namespace SpaceShip.Front
             }
 
             
-            int playerChoice = inputManager.GetPlayerIntegerChoice(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)).ToList());
+            int playerChoice = inputManager.GetPlayerIntegerChoice(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)+1).ToList());
                     
 
             Console.WriteLine($"You are a {engine.ProfessionsList[playerChoice - 1].Name} !" + "\n" +
@@ -66,7 +66,8 @@ namespace SpaceShip.Front
             }
 
             // When weapon is picked, we give some information to player
-            int playerChoice2 = inputManager.GetPlayerIntegerChoice();
+            int playerChoice2 = inputManager.GetPlayerIntegerChoice(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)).ToList());
+            
             Console.WriteLine($"You picked {engine.WeaponsList[playerChoice2 - 1].Name} !" + "\n" +
                               $"It's a powerful ally which deals between {engine.WeaponsList[playerChoice2 - 1].MinDamage} and {engine.WeaponsList[playerChoice2 - 1].MaxDamage} damages to an eventual target. ");
             Console.WriteLine();
@@ -99,7 +100,7 @@ namespace SpaceShip.Front
             engine.GenerateMonster();
             engine.AppearingMonster.CurrentHealth = engine.AppearingMonster.MaxHealth;
 
-            Console.WriteLine($"You enter in the room. It's dark, but you can see a big shadow in front of you. " +
+            Console.WriteLine($"You enter the room. It's dark, but you can see a big shadow in front of you. " +
                                 $"Looks to be a {engine.AppearingMonster.Name}.");
             Console.WriteLine($"You grab your {engine.SelectedWeapon.Name} and a violent fight takes place!");
             Console.WriteLine($"This {engine.AppearingMonster.Name} has {engine.AppearingMonster.MaxHealth} HP.");
@@ -175,7 +176,7 @@ namespace SpaceShip.Front
                 {
                     Console.WriteLine($"{engine.ItemsList.IndexOf(item) + 1}. {item.Name}");
                 }
-                int playerChoice3 = inputManager.GetPlayerIntegerChoice();
+                int playerChoice3 = inputManager.GetPlayerIntegerChoice(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)).ToList());
                 engine.SomeItem = engine.ItemsList[playerChoice3 - 1];
 
                 switch (playerChoice3)
