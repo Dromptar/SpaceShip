@@ -96,7 +96,8 @@ namespace SpaceShip.Engine
                 Armor = 13,
                 MinDamage = 1,
                 MaxDamage = 6,
-                Attack = 4
+                Attack = 4,
+                XpValue = 30
             },
             new Monster()
             {
@@ -105,7 +106,8 @@ namespace SpaceShip.Engine
                 Armor = 8,
                 MinDamage = 1,
                 MaxDamage = 4,
-                Attack = 1
+                Attack = 1,
+                XpValue = 15
             },
             new Monster()
             {
@@ -114,7 +116,8 @@ namespace SpaceShip.Engine
                 Armor = 10,
                 MinDamage = 1,
                 MaxDamage = 6,
-                Attack = 2
+                Attack = 2,
+                XpValue = 20
             },
             new Monster()
             {
@@ -123,7 +126,8 @@ namespace SpaceShip.Engine
                 Armor = 12,
                 MinDamage = 1,
                 MaxDamage = 8,
-                Attack = 3
+                Attack = 3,
+                XpValue = 25
             }
         };
 
@@ -236,7 +240,7 @@ namespace SpaceShip.Engine
 
             if(monsterIsDead)
             {
-               YourCharacter.CurrentXp =+ 25;
+               YourCharacter.CurrentXp =+ AppearingMonster.XpValue;
                 
                 if(YourCharacter.CurrentXp >= neededXp)
                 {

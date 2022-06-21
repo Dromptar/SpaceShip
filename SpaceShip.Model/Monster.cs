@@ -15,6 +15,7 @@ namespace SpaceShip.Model
         public int MinDamage { get; set; }
         public int MaxDamage { get; set; }
         public int Attack { get; set; }
+        public int XpValue { get; set; }
 
 
 

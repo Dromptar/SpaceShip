@@ -168,7 +168,8 @@ namespace SpaceShip.Front
                     engine.AddExperience();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"The {engine.AppearingMonster.Name} is dead. Congratulation! You won the fight!");
-                    Console.WriteLine($"You still have {engine.YourCharacter.CurrentHealth} HP after the fight and your xp is now {engine.YourCharacter.CurrentXp}.");
+                    Console.WriteLine($"You still have {engine.YourCharacter.CurrentHealth} HP after the fight.");
+                    Console.WriteLine($"You won {engine.AppearingMonster.XpValue} xp points and your xp is now {engine.YourCharacter.CurrentXp}");
                     break;
                 }
 
