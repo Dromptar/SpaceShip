@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceShip.Model
 {
-    public class Profession
+    public class Character
     {
         public string Name { get; set; }
         public int MaxHealth { get; set; }
@@ -14,9 +14,12 @@ namespace SpaceShip.Model
         public int Armor { get; set; }
         public int Attack { get; set; }
         public bool IsActive { get; set; }
+        public int CurrentXp { get; set; }
+        public int CurrentLevel { get; set; }
+        public int[] ToLevelUp { get; set; }  
 
 
-        public Profession(int maxHealth, int currentHealth)
+        public Character(int maxHealth, int currentHealth)
         {
             MaxHealth = maxHealth;
             CurrentHealth = currentHealth;

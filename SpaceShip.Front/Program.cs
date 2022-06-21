@@ -19,6 +19,8 @@ namespace SpaceShip.Front
         static void Main()
         {
             Menu();
+
+
             
             while(engine.KeepFighting())
             {
@@ -74,7 +76,8 @@ namespace SpaceShip.Front
             int playerChoice2 = inputManager.GetPlayerInteger(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)).ToList());
             
             Console.WriteLine($"You picked {engine.WeaponsList[playerChoice2 - 1].Name} !" + "\n" +
-                              $"It's a powerful ally which deals between {engine.WeaponsList[playerChoice2 - 1].MinDamage} and {engine.WeaponsList[playerChoice2 - 1].MaxDamage} damages to an eventual target. ");
+                              $"It's a powerful ally which deals between {engine.WeaponsList[playerChoice2 - 1].MinDamage} and {engine.WeaponsList[playerChoice2 - 1].MaxDamage} damages to an eventual target. " + "\n" +
+                              $"Moreover, this weapon increases your natural armor by {engine.WeaponsList[playerChoice2 - 1].BonusArmor} points. ");
             Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
@@ -124,7 +127,7 @@ namespace SpaceShip.Front
                 var CharacterAttack = engine.CharacterAttack();
                 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"You have {engine.YourCharacter.Armor} of defense. {engine.AppearingMonster.Name} attacks and scores {MonsterAttack.Score}.");
+                Console.WriteLine($"You have {engine.YourCharacter.Armor + engine.SelectedWeapon.BonusArmor} of defense. {engine.AppearingMonster.Name} attacks and scores {MonsterAttack.Score}.");
                 if (MonsterAttack.Success)
                 {
                     Console.WriteLine($"The creature hurts you and you lose {engine.MonsterDamage()} Hp.");
@@ -162,9 +165,10 @@ namespace SpaceShip.Front
 
                 if (engine.AppearingMonster.CurrentHealth <= 0)
                 {
+                    engine.AddExperience();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"The {engine.AppearingMonster.Name} is dead. Congratulation! You won the fight!");
-                    Console.WriteLine($"You still have {engine.YourCharacter.CurrentHealth} HP after the fight.");
+                    Console.WriteLine($"You still have {engine.YourCharacter.CurrentHealth} HP after the fight and your xp is now {engine.YourCharacter.CurrentXp}.");
                     break;
                 }
 
@@ -173,9 +177,9 @@ namespace SpaceShip.Front
             Console.Clear();
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Would you like to use some item from your backpack? (O/N)");
-            string playerChoice4 = inputManager.GetPlayerString(1,50).ToUpper();
-            if (playerChoice4 == "O")
+            Console.WriteLine("Would you like to use some item from your backpack? (Y/N)");
+            bool playerChoice4 = inputManager.GetPlayerBool("Y","N");
+            if (playerChoice4 == true)
             {
                 foreach (var item in engine.ItemsList)
                 {
@@ -200,7 +204,7 @@ namespace SpaceShip.Front
                 }
 
             }
-            else if (playerChoice4 == "N")
+            else if (playerChoice4 == false)
             {
                 engine.KeepFighting();
             }

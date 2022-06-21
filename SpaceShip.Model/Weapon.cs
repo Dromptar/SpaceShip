@@ -10,7 +10,7 @@ namespace SpaceShip.Model
     {
 
         public string Name { get; set; }
-        public int Armor { get; set; }
+        public int BonusArmor { get; set; }
         public int MinDamage { get; set; }
         public int MaxDamage { get; set; }
         

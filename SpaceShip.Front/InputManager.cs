@@ -12,22 +12,6 @@ namespace SpaceShip.Front
     {
 
 
-        //public int GetPlayerIntegerChoice(List<int> myList)
-        //{
-        //    int number;
-        //    string value = Console.ReadLine();
-        //    bool success = int.TryParse(value, out number);
-        //    var exists = myList.Contains(number);
-        //    while (!success && !exists)
-        //    {
-        //        Console.WriteLine($"{value} is not a number. Please try again.");
-        //        // offer again posibility to choice
-        //        value = Console.ReadLine();
-        //        success = int.TryParse(value, out number);
-
-        //    }
-        //        return number;  
-        //}
 
         public int GetPlayerInteger(List<int> acceptableValues)
         {
@@ -60,29 +44,54 @@ namespace SpaceShip.Front
         public string GetPlayerString(int minLength, int maxLength)
         {
             string value;
+            bool isValueTooShort;
+            bool isValueTooLong;
 
             do
             {
                 value = Console.ReadLine();
+                isValueTooShort = value.Length <= minLength;
+                isValueTooLong = value.Length >= maxLength;
 
-                if (value.Length <= minLength)
-                {
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine($"Invalid entry. Needs to contain between 2 and 30 caracters. Please type again.");
-                }
-                else if (value.Length >= maxLength)
+                if (isValueTooShort || isValueTooLong)
                 {
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine($"Invalid entry. Needs to contain between 2 and 30 caracters. Please type again.");
                 }
 
             }
-            while (value.Length <= minLength || value.Length >= maxLength);
+            while (isValueTooShort || isValueTooLong);
 
             return value;
         }
-    }
 
+
+        public bool GetPlayerBool(string positiveChoice, string negativeChoice)
+        {
+            string value;
+
+            do
+            {
+                value = Console.ReadLine().ToUpper();
+
+                if ( value == positiveChoice)
+                {
+                    return true;
+                    
+                }
+                else if( value == negativeChoice)
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid answer. Type again.");
+                }
+                
+            }
+            while (true);
+        }
+    }
 
  }
 

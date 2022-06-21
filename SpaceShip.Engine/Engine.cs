@@ -3,17 +3,17 @@ using SpaceShip.Model;
 
 namespace SpaceShip.Engine
 {
-    
+
     public class GameEngine
     {
         public Item SomeItem { get; set; }
-        public Profession YourCharacter { get; set; }
-        public Weapon SelectedWeapon { get; set; } 
+        public Character YourCharacter { get; set; }
+        public Weapon SelectedWeapon { get; set; }
         public Monster AppearingMonster { get; set; }
         public DicesManager DicesManager { get; set; }
 
-        public List<Profession> ProfessionsList 
-        { 
+        public List<Character> ProfessionsList
+        {
             get
             {
                 return professionsList.Where(pro => pro.IsActive).ToList();
@@ -21,31 +21,42 @@ namespace SpaceShip.Engine
 
         }
 
-        private List<Profession> professionsList = new List<Profession>
+        private List<Character> professionsList = new List<Character>
         {
-            new Profession(20, 20)
+            new Character(20, 20)
             {
                 Name = "Soldier",
+                CurrentLevel = 1,
             //  MaxHealth = 20,
                 Armor = 14,
                 Attack = 2,
                 IsActive = true
             },
-            new Profession(18, 18)
+            new Character(18, 18)
             {
                 Name = "Smuggler",
+                CurrentLevel = 1,
              // MaxHealth = 18,
                 Armor = 12,
                 Attack = 4,
-                IsActive = false
+                IsActive = true
             },
-            new Profession(16, 16)
+            new Character(16, 16)
             {
                 Name = "Alchimist",
+                CurrentLevel = 1,
                 //MaxHealth = 16,
                 Armor = 10,
                 Attack = 6,
                 IsActive = true
+            },
+            new Character(50, 50)
+            {
+                Name = "Chuck",
+                //MaxHealth = 16,
+                Armor = 40,
+                Attack = 30,
+                IsActive = false
             },
 
         };
@@ -56,18 +67,21 @@ namespace SpaceShip.Engine
             new Weapon
             {
                 Name = "Blaster",
+                BonusArmor = 1,
                 MinDamage = 1,
                 MaxDamage = 10
             },
             new Weapon
             {
                 Name = "Laser Staff",
+                BonusArmor = 3,
                 MinDamage = 1,
                 MaxDamage = 6
             },
             new Weapon
             {
                 Name = "Energy Shield",
+                BonusArmor = 5,
                 MinDamage = 1,
                 MaxDamage = 4
             }
@@ -147,7 +161,8 @@ namespace SpaceShip.Engine
 
         public DiceResult MonsterAttack()
         {
-            DiceResult roll = DicesManager.RollDice(20, YourCharacter.Armor, AppearingMonster.Attack);
+            int heroArmor = YourCharacter.Armor + SelectedWeapon.BonusArmor;
+            DiceResult roll = DicesManager.RollDice(20, heroArmor, AppearingMonster.Attack);
             return roll;
         }
 
@@ -165,7 +180,7 @@ namespace SpaceShip.Engine
         }
 
         public int MonsterDamage()
-        {         
+        {
             int damage = MonsterRandomDamage(AppearingMonster);
             YourCharacter.CurrentHealth -= damage;
             return damage;
@@ -213,5 +228,30 @@ namespace SpaceShip.Engine
             YourCharacter.Armor += increaseArmor;
             return increaseArmor;
         }
+
+        public void AddExperience()
+        {
+            bool monsterIsDead = AppearingMonster.CurrentHealth <= 0;
+            var neededXp = YourCharacter.CurrentLevel * 100 * 1.25;
+
+            if(monsterIsDead)
+            {
+               YourCharacter.CurrentXp =+ 25;
+                
+                if(YourCharacter.CurrentXp >= neededXp)
+                {
+                    YourCharacter.CurrentLevel++;
+                    LevelUp();
+                }
+            }
+
+        }
+
+        public void LevelUp()
+        {
+            //Here comes new stats modifications
+
+        }
+       
     }
-}
+ }
