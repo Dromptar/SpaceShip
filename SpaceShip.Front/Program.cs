@@ -140,7 +140,7 @@ namespace SpaceShip.Front
                 Console.WriteLine();
                 Console.ReadKey(true);
 
-                if (engine.YourCharacter.CurrentHealth <= 0)
+                if (engine.YouLoseTheFight())
                 {
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("You received a huge strike over the head.");
@@ -163,13 +163,17 @@ namespace SpaceShip.Front
                 Console.WriteLine();
                 Console.ReadKey(true);
 
-                if (engine.AppearingMonster.CurrentHealth <= 0)
-                {
+                if (engine.YouWinTheFight())
+                { 
                     engine.AddExperience();
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"The {engine.AppearingMonster.Name} is dead. Congratulation! You won the fight!");
+                    Console.WriteLine($"The {engine.AppearingMonster.Name} is dead. Well done! You won the fight!");
                     Console.WriteLine($"You still have {engine.YourCharacter.CurrentHealth} HP after the fight.");
                     Console.WriteLine($"You won {engine.AppearingMonster.XpValue} xp points and your xp is now {engine.YourCharacter.CurrentXp}");
+                    if (engine.LevelUp())
+                    {
+                        Console.WriteLine($"Congratulation, you are now level {engine.YourCharacter.CurrentLevel}.");
+                    }
                     break;
                 }
 

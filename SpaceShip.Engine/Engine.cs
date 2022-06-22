@@ -29,7 +29,7 @@ namespace SpaceShip.Engine
                 CurrentLevel = 1,
             //  MaxHealth = 20,
                 Armor = 14,
-                Attack = 2,
+                Attack = 4,
                 IsActive = true
             },
             new Character(18, 18)
@@ -38,7 +38,7 @@ namespace SpaceShip.Engine
                 CurrentLevel = 1,
              // MaxHealth = 18,
                 Armor = 12,
-                Attack = 4,
+                Attack = 6,
                 IsActive = true
             },
             new Character(16, 16)
@@ -47,16 +47,17 @@ namespace SpaceShip.Engine
                 CurrentLevel = 1,
                 //MaxHealth = 16,
                 Armor = 10,
-                Attack = 6,
+                Attack = 8,
                 IsActive = true
             },
             new Character(50, 50)
             {
                 Name = "Chuck",
+                CurrentLevel = 1,
                 //MaxHealth = 16,
                 Armor = 40,
                 Attack = 30,
-                IsActive = false
+                IsActive = true
             },
 
         };
@@ -212,6 +213,16 @@ namespace SpaceShip.Engine
                 return false;
         }
 
+        public bool YouWinTheFight()
+        {
+            return AppearingMonster.CurrentHealth <= 0;
+        }
+
+        public bool YouLoseTheFight()
+        {
+            return YourCharacter.CurrentHealth <= 0;
+        }
+
         public int PotionEffect(Item item)
         {
             Random rnd = new Random();
@@ -235,25 +246,21 @@ namespace SpaceShip.Engine
 
         public void AddExperience()
         {
-            bool monsterIsDead = AppearingMonster.CurrentHealth <= 0;
-            var neededXp = YourCharacter.CurrentLevel * 100 * 1.25;
-
-            if(monsterIsDead)
-            {
-               YourCharacter.CurrentXp =+ AppearingMonster.XpValue;
+            var neededXp = YourCharacter.CurrentLevel * 10 * 1.25;
+            YourCharacter.CurrentXp += AppearingMonster.XpValue;
                 
-                if(YourCharacter.CurrentXp >= neededXp)
-                {
-                    YourCharacter.CurrentLevel++;
-                    LevelUp();
-                }
+            if(YourCharacter.CurrentXp >= neededXp)
+            {
+                LevelUp();
             }
 
         }
 
-        public void LevelUp()
+        public bool LevelUp()
         {
             //Here comes new stats modifications
+            YourCharacter.CurrentLevel++;
+            return true;
 
         }
        
