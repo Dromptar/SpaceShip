@@ -52,7 +52,7 @@ namespace SpaceShip.Engine
             },
             new Character(50, 50)
             {
-                Name = "Chuck",
+                Name = "GodMod",
                 CurrentLevel = 1,
                 //MaxHealth = 16,
                 Armor = 40,
@@ -188,6 +188,10 @@ namespace SpaceShip.Engine
         {
             int damage = MonsterRandomDamage(AppearingMonster);
             YourCharacter.CurrentHealth -= damage;
+            if (YourCharacter.CurrentHealth < 0)
+            {
+                YourCharacter.CurrentHealth = 0;
+            }
             return damage;
         }
 
@@ -201,8 +205,11 @@ namespace SpaceShip.Engine
         {
             int damage = WeaponRandomDamage(SelectedWeapon);
             AppearingMonster.CurrentHealth -= damage;
+            if(AppearingMonster.CurrentHealth < 0)
+            {
+                AppearingMonster.CurrentHealth = 0;
+            }
             return damage;
-
         }
 
         public bool KeepFighting()
@@ -234,6 +241,10 @@ namespace SpaceShip.Engine
         {
             int regainLife = PotionEffect(SomeItem);
             YourCharacter.CurrentHealth += regainLife;
+            if(YourCharacter.CurrentHealth > YourCharacter.MaxHealth)
+            {
+                YourCharacter.CurrentHealth = YourCharacter.MaxHealth;
+            }
             return regainLife;
         }
 
@@ -246,22 +257,23 @@ namespace SpaceShip.Engine
 
         public void AddExperience()
         {
-            var neededXp = YourCharacter.CurrentLevel * 10 * 1.25;
             YourCharacter.CurrentXp += AppearingMonster.XpValue;
-                
-            if(YourCharacter.CurrentXp >= neededXp)
-            {
-                LevelUp();
-            }
-
         }
 
         public bool LevelUp()
         {
             //Here comes new stats modifications
-            YourCharacter.CurrentLevel++;
-            return true;
-
+            var neededXp = YourCharacter.CurrentLevel * 100 * 1.25;
+            if (YourCharacter.CurrentXp >= neededXp)
+            {
+                YourCharacter.CurrentLevel++;
+                YourCharacter.CurrentHealth += 5;
+                YourCharacter.Attack += 2;
+                YourCharacter.Armor += 2;
+                return true;
+            }
+            else
+                return false;
         }
        
     }

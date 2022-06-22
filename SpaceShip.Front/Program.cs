@@ -20,8 +20,6 @@ namespace SpaceShip.Front
         {
             Menu();
 
-
-            
             while(engine.KeepFighting())
             {
                Fight();
@@ -165,6 +163,7 @@ namespace SpaceShip.Front
 
                 if (engine.YouWinTheFight())
                 { 
+                    
                     engine.AddExperience();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"The {engine.AppearingMonster.Name} is dead. Well done! You won the fight!");
