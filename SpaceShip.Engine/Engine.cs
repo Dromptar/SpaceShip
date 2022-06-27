@@ -29,6 +29,8 @@ namespace SpaceShip.Engine
                 CurrentLevel = 1,
             //  MaxHealth = 20,
                 Armor = 14,
+                MedipackQuantity = 2,
+                ArmorImplantQuantity = 1,
                 Attack = 4,
                 IsActive = true
             },
@@ -38,6 +40,8 @@ namespace SpaceShip.Engine
                 CurrentLevel = 1,
              // MaxHealth = 18,
                 Armor = 12,
+                MedipackQuantity = 0,
+                ArmorImplantQuantity = 1,
                 Attack = 6,
                 IsActive = true
             },
@@ -47,6 +51,8 @@ namespace SpaceShip.Engine
                 CurrentLevel = 1,
                 //MaxHealth = 16,
                 Armor = 10,
+                MedipackQuantity = 2,
+                ArmorImplantQuantity = 1,
                 Attack = 8,
                 IsActive = true
             },
@@ -56,6 +62,8 @@ namespace SpaceShip.Engine
                 CurrentLevel = 1,
                 //MaxHealth = 16,
                 Armor = 40,
+                MedipackQuantity = 5,
+                ArmorImplantQuantity = 5,
                 Attack = 30,
                 IsActive = true
             },
@@ -85,7 +93,14 @@ namespace SpaceShip.Engine
                 BonusArmor = 5,
                 MinDamage = 1,
                 MaxDamage = 4
-            }
+            },
+            new Weapon
+            {
+                Name = "BFG",
+                BonusArmor = 10,
+                MinDamage = 1,
+                MaxDamage = 12
+            },
         };
 
         public List<Monster> MonstersList = new List<Monster>
@@ -136,17 +151,17 @@ namespace SpaceShip.Engine
         {
             new Item
             {
-                Name = "Health Potion",
+                Name = "Medipack",
                 Quantity = 1,
                 MinEffect = 1,
                 MaxEffect = 8
             },
             new Item
             {
-                Name = "Armor Potion",
+                Name = "Armor implant",
                 Quantity = 1,
                 MinEffect = 1,
-                MaxEffect = 6
+                MaxEffect = 4
             }
 
         };
@@ -163,6 +178,9 @@ namespace SpaceShip.Engine
             int index = rnd.Next(MonstersList.Count);
             AppearingMonster = MonstersList[index];
         }
+
+
+        /**********************  Fighting system  **********************/
 
         public DiceResult MonsterAttack()
         {
@@ -230,31 +248,41 @@ namespace SpaceShip.Engine
             return YourCharacter.CurrentHealth <= 0;
         }
 
-        public int PotionEffect(Item item)
+        /**********************  Items / Inventory system  **********************/
+        public int ItemEffect(Item item)
         {
             Random rnd = new Random();
-            int potionEffect = rnd.Next(item.MinEffect, item.MaxEffect);
-            return potionEffect;
+            int itemEffect = rnd.Next(item.MinEffect, item.MaxEffect);
+            return itemEffect;
         }
 
-        public int HealthPotion()
+        public int Medipack()
         {
-            int regainLife = PotionEffect(SomeItem);
-            YourCharacter.CurrentHealth += regainLife;
-            if(YourCharacter.CurrentHealth > YourCharacter.MaxHealth)
+            int regainLife = ItemEffect(SomeItem);
+            if(YourCharacter.MedipackQuantity > 0)
             {
-                YourCharacter.CurrentHealth = YourCharacter.MaxHealth;
+                YourCharacter.CurrentHealth += regainLife;
+
+                if (YourCharacter.CurrentHealth > YourCharacter.MaxHealth)
+                {
+                    YourCharacter.CurrentHealth = YourCharacter.MaxHealth;
+                }
+            }
+            else
+            {
+                Console.WriteLine("You are out of Medipack !");
             }
             return regainLife;
         }
 
-        public int ArmorPotion()
+        public int ArmorImplant()
         {
-            int increaseArmor = PotionEffect(SomeItem);
+            int increaseArmor = ItemEffect(SomeItem);
             YourCharacter.Armor += increaseArmor;
             return increaseArmor;
         }
 
+        /**********************  Leveling System  **********************/
         public void AddExperience()
         {
             YourCharacter.CurrentXp += AppearingMonster.XpValue;

@@ -14,6 +14,8 @@ namespace SpaceShip.Model
         public int Armor { get; set; }
         public int Attack { get; set; }
         public bool IsActive { get; set; }
+        public int MedipackQuantity { get; set; }
+        public int ArmorImplantQuantity { get; set; }
         public int CurrentXp { get; set; }
         public int CurrentLevel { get; set; }
         public int[] ToLevelUp { get; set; }  

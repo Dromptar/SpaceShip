@@ -71,7 +71,7 @@ namespace SpaceShip.Front
             }
 
             // When weapon is picked, we give some information to player
-            int playerChoice2 = inputManager.GetPlayerInteger(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)).ToList());
+            int playerChoice2 = inputManager.GetPlayerInteger(engine.WeaponsList.Select(weap => engine.WeaponsList.IndexOf(weap)+1).ToList());
             
             Console.WriteLine($"You picked {engine.WeaponsList[playerChoice2 - 1].Name} !" + "\n" +
                               $"It's a powerful ally which deals between {engine.WeaponsList[playerChoice2 - 1].MinDamage} and {engine.WeaponsList[playerChoice2 - 1].MaxDamage} damages to an eventual target. " + "\n" +
@@ -181,9 +181,13 @@ namespace SpaceShip.Front
             Console.Clear();
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Would you like to use some item from your backpack? (Y/N)");
-            bool playerChoice4 = inputManager.GetPlayerBool("Y","N");
-            if (playerChoice4 == true)
+            Console.WriteLine($"What do you want to do ?"+ "\n" +
+                          $"1. Use backpack"+ "\n" +
+                          $"2. Next room!" + "\n" +
+                          $"3. Exit Game");
+            
+            int playerChoice4 = inputManager.GetPlayerInteger(new List<int> { 1, 2, 3});
+            if (playerChoice4 == 1)
             {
                 foreach (var item in engine.ItemsList)
                 {
@@ -196,21 +200,25 @@ namespace SpaceShip.Front
                 {
                     case 1:
                         Console.WriteLine($"You use {engine.ItemsList[playerChoice3 - 1].Name} !" + "\n" +
-                                            $"You regen {engine.HealthPotion()} HP." + "\n" +
+                                            $"You regen {engine.Medipack()} HP." + "\n" +
                                             $"You feel better and now have {engine.YourCharacter.CurrentHealth} HP");
                         break;
 
                     case 2:
                         Console.WriteLine($"You use {engine.ItemsList[playerChoice3 - 1].Name} !" + "\n" +
-                                            $"You increased your armor by {engine.ArmorPotion()} points." + "\n" +
-                                            $"You feel stronger and now have {engine.YourCharacter.Armor} armor score.");
+                                          $"You increased your armor by {engine.ArmorImplant()} points." + "\n" +
+                                          $"You feel stronger and now have {engine.YourCharacter.Armor} armor score.");
                         break;
                 }
 
             }
-            else if (playerChoice4 == false)
+            else if (playerChoice4 == 2)
             {
                 engine.KeepFighting();
+            }
+            else if(playerChoice4 == 3)
+            {
+                Environment.Exit(0);
             }
 
             
