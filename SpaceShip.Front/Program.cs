@@ -46,17 +46,17 @@ namespace SpaceShip.Front
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine($"Hi {playerName}. Choose your profession : ");
             Console.WriteLine();
-            foreach (var profession in engine.ProfessionsList)
+            foreach (var job in engine.JobsList)
             {
-                Console.WriteLine($"{engine.ProfessionsList.IndexOf(profession) + 1}. {profession.Name}");
+                Console.WriteLine($"{engine.JobsList.IndexOf(job) + 1}. {job.Name}");
             }
 
             
-            int playerChoice = inputManager.GetPlayerInteger(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)+1).ToList());
+            int playerChoice = inputManager.GetPlayerInteger(engine.JobsList.Select(job => engine.JobsList.IndexOf(job)+1).ToList());
                     
 
-            Console.WriteLine($"You are a {engine.ProfessionsList[playerChoice - 1].Name} !" + "\n" +
-                              $"The {engine.ProfessionsList[playerChoice - 1].Name} offers you {engine.ProfessionsList[playerChoice - 1].MaxHealth} HP and {engine.ProfessionsList[playerChoice - 1].Armor} of protection. ");
+            Console.WriteLine($"You are a {engine.JobsList[playerChoice - 1].Name} !" + "\n" +
+                              $"The {engine.JobsList[playerChoice - 1].Name} offers you {engine.JobsList[playerChoice - 1].MaxHealth} HP and {engine.JobsList[playerChoice - 1].Armor} of protection. ");
                
 
             Console.WriteLine("Press any key to continue...");
@@ -89,12 +89,12 @@ namespace SpaceShip.Front
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
             Console.WriteLine();
-            Console.WriteLine($"Now , be brave and proud young {engine.ProfessionsList[playerChoice - 1].Name} and let's fight the evil of the lost Spaceship with your new {engine.WeaponsList[playerChoice2 - 1].Name} ..." + "\n" +
+            Console.WriteLine($"Now , be brave and proud young {engine.JobsList[playerChoice - 1].Name} and let's fight the evil of the lost Spaceship with your new {engine.WeaponsList[playerChoice2 - 1].Name} ..." + "\n" +
                 $"Ready?");
             Console.ReadKey(true);
             Console.Clear();
 
-            engine.YourCharacter = engine.ProfessionsList[playerChoice - 1];
+            engine.YourCharacterJob = engine.JobsList[playerChoice - 1];
             engine.SelectedWeapon = engine.WeaponsList[playerChoice2 - 1];
         }
             
@@ -110,14 +110,14 @@ namespace SpaceShip.Front
                                 $"Looks to be a {engine.AppearingMonster.Name}.");
             Console.WriteLine($"You grab your {engine.SelectedWeapon.Name} and a violent fight takes place!");
             Console.WriteLine($"This {engine.AppearingMonster.Name} has {engine.AppearingMonster.MaxHealth} HP.");
-            Console.WriteLine($"You have {engine.YourCharacter.CurrentHealth} HP.");
+            Console.WriteLine($"You have {engine.YourCharacterJob.CurrentHealth} HP.");
             Console.ReadKey(true);
             Console.Clear();
 
             // Starting the fight
             // engine.Appearing_monster.CurrentHealth = engine.Appearing_monster.MaxHealth;
 
-            while (engine.AppearingMonster.CurrentHealth >= 0 || engine.YourCharacter.CurrentHealth >= 0)
+            while (engine.AppearingMonster.CurrentHealth >= 0 || engine.YourCharacterJob.CurrentHealth >= 0)
             {
                 // Tour du monstre
                
@@ -125,11 +125,11 @@ namespace SpaceShip.Front
                 var CharacterAttack = engine.CharacterAttack();
                 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"You have {engine.YourCharacter.Armor + engine.SelectedWeapon.BonusArmor} of defense. {engine.AppearingMonster.Name} attacks and scores {MonsterAttack.Score}.");
+                Console.WriteLine($"You have {engine.YourCharacterJob.Armor + engine.SelectedWeapon.BonusArmor} of defense. {engine.AppearingMonster.Name} attacks and scores {MonsterAttack.Score}.");
                 if (MonsterAttack.Success)
                 {
                     Console.WriteLine($"The creature hurts you and you lose {engine.MonsterDamage()} Hp.");
-                    Console.WriteLine($"You still have {engine.YourCharacter.CurrentHealth} HP.");
+                    Console.WriteLine($"You still have {engine.YourCharacterJob.CurrentHealth} HP.");
                 }
                 else
                 {
@@ -167,7 +167,7 @@ namespace SpaceShip.Front
                     engine.AddExperience();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"The {engine.AppearingMonster.Name} is dead. Well done! You won the fight!");
-                    Console.WriteLine($"You still have {engine.YourCharacter.CurrentHealth} HP after the fight.");
+                    Console.WriteLine($"You still have {engine.YourCharacterJob.CurrentHealth} HP after the fight.");
                     Console.WriteLine($"You won {engine.AppearingMonster.XpValue} xp points and your xp is now {engine.YourCharacter.CurrentXp}");
                     if (engine.LevelUp())
                     {
@@ -182,9 +182,9 @@ namespace SpaceShip.Front
 
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine($"What do you want to do ?"+ "\n" +
-                          $"1. Use backpack"+ "\n" +
-                          $"2. Next room!" + "\n" +
-                          $"3. Exit Game");
+                              $"1. Use backpack"+ "\n" +
+                              $"2. Next room!" + "\n" +
+                              $"3. Exit Game");
             
             int playerChoice4 = inputManager.GetPlayerInteger(new List<int> { 1, 2, 3});
             if (playerChoice4 == 1)
@@ -193,7 +193,7 @@ namespace SpaceShip.Front
                 {
                     Console.WriteLine($"{engine.ItemsList.IndexOf(item) + 1}. {item.Name}");
                 }
-                int playerChoice3 = inputManager.GetPlayerInteger(engine.ProfessionsList.Select(pro => engine.ProfessionsList.IndexOf(pro)).ToList());
+                int playerChoice3 = inputManager.GetPlayerInteger(engine.JobsList.Select(pro => engine.JobsList.IndexOf(pro)).ToList());
                 engine.SomeItem = engine.ItemsList[playerChoice3 - 1];
 
                 switch (playerChoice3)
@@ -201,13 +201,13 @@ namespace SpaceShip.Front
                     case 1:
                         Console.WriteLine($"You use {engine.ItemsList[playerChoice3 - 1].Name} !" + "\n" +
                                             $"You regen {engine.Medipack()} HP." + "\n" +
-                                            $"You feel better and now have {engine.YourCharacter.CurrentHealth} HP");
+                                            $"You feel better and now have {engine.YourCharacterJob.CurrentHealth} HP");
                         break;
 
                     case 2:
                         Console.WriteLine($"You use {engine.ItemsList[playerChoice3 - 1].Name} !" + "\n" +
                                           $"You increased your armor by {engine.ArmorImplant()} points." + "\n" +
-                                          $"You feel stronger and now have {engine.YourCharacter.Armor} armor score.");
+                                          $"You feel stronger and now have {engine.YourCharacterJob.Armor} armor score.");
                         break;
                 }
 

@@ -8,62 +8,47 @@ namespace SpaceShip.Engine
     {
         public Item SomeItem { get; set; }
         public Character YourCharacter { get; set; }
+        public Job YourCharacterJob { get; set; }
         public Weapon SelectedWeapon { get; set; }
         public Monster AppearingMonster { get; set; }
         public DicesManager DicesManager { get; set; }
 
-        public List<Character> ProfessionsList
+        public List<Job> JobsList
         {
             get
             {
-                return professionsList.Where(pro => pro.IsActive).ToList();
+                return jobsList.Where(pro => pro.IsActive).ToList();
             }
 
         }
 
-        private List<Character> professionsList = new List<Character>
+        private List<Job> jobsList = new List<Job>
         {
-            new Character(20, 20)
+            new Job(14, 14)
             {
                 Name = "Soldier",
-                CurrentLevel = 1,
-            //  MaxHealth = 20,
                 Armor = 14,
-                MedipackQuantity = 2,
-                ArmorImplantQuantity = 1,
                 Attack = 4,
                 IsActive = true
             },
-            new Character(18, 18)
+            new Job(12, 12)
             {
                 Name = "Smuggler",
-                CurrentLevel = 1,
-             // MaxHealth = 18,
                 Armor = 12,
-                MedipackQuantity = 0,
-                ArmorImplantQuantity = 1,
                 Attack = 6,
                 IsActive = true
             },
-            new Character(16, 16)
+            new Job(10, 10)
             {
                 Name = "Alchimist",
-                CurrentLevel = 1,
-                //MaxHealth = 16,
                 Armor = 10,
-                MedipackQuantity = 2,
-                ArmorImplantQuantity = 1,
                 Attack = 8,
                 IsActive = true
             },
-            new Character(50, 50)
+            new Job(25, 25)
             {
                 Name = "GodMod",
-                CurrentLevel = 1,
-                //MaxHealth = 16,
                 Armor = 40,
-                MedipackQuantity = 5,
-                ArmorImplantQuantity = 5,
                 Attack = 30,
                 IsActive = true
             },
@@ -184,14 +169,14 @@ namespace SpaceShip.Engine
 
         public DiceResult MonsterAttack()
         {
-            int heroArmor = YourCharacter.Armor + SelectedWeapon.BonusArmor;
+            int heroArmor = YourCharacterJob.Armor + SelectedWeapon.BonusArmor;
             DiceResult roll = DicesManager.RollDice(20, heroArmor, AppearingMonster.Attack);
             return roll;
         }
 
         public DiceResult CharacterAttack()
         {
-            DiceResult roll = DicesManager.RollDice(20, AppearingMonster.Armor, YourCharacter.Attack);
+            DiceResult roll = DicesManager.RollDice(20, AppearingMonster.Armor, YourCharacterJob.Attack);
             return roll;
         }
 
@@ -205,10 +190,10 @@ namespace SpaceShip.Engine
         public int MonsterDamage()
         {
             int damage = MonsterRandomDamage(AppearingMonster);
-            YourCharacter.CurrentHealth -= damage;
-            if (YourCharacter.CurrentHealth < 0)
+            YourCharacterJob.CurrentHealth -= damage;
+            if (YourCharacterJob.CurrentHealth < 0)
             {
-                YourCharacter.CurrentHealth = 0;
+                YourCharacterJob.CurrentHealth = 0;
             }
             return damage;
         }
@@ -217,6 +202,10 @@ namespace SpaceShip.Engine
         {
             Random rnd = new Random();
             int damage = rnd.Next(weapon.MinDamage, weapon.MaxDamage);
+            if(damage == 20)
+            {
+                return damage * 2;
+            }
             return damage;
         }
         public int WeaponDamage()
@@ -232,7 +221,7 @@ namespace SpaceShip.Engine
 
         public bool KeepFighting()
         {
-            if (YourCharacter.CurrentHealth > 0)
+            if (YourCharacterJob.CurrentHealth > 0)
                 return true;
             else
                 return false;
@@ -245,7 +234,7 @@ namespace SpaceShip.Engine
 
         public bool YouLoseTheFight()
         {
-            return YourCharacter.CurrentHealth <= 0;
+            return YourCharacterJob.CurrentHealth <= 0;
         }
 
         /**********************  Items / Inventory system  **********************/
@@ -261,11 +250,11 @@ namespace SpaceShip.Engine
             int regainLife = ItemEffect(SomeItem);
             if(YourCharacter.MedipackQuantity > 0)
             {
-                YourCharacter.CurrentHealth += regainLife;
+                YourCharacterJob.CurrentHealth += regainLife;
 
-                if (YourCharacter.CurrentHealth > YourCharacter.MaxHealth)
+                if (YourCharacterJob.CurrentHealth > YourCharacterJob.MaxHealth)
                 {
-                    YourCharacter.CurrentHealth = YourCharacter.MaxHealth;
+                    YourCharacterJob.CurrentHealth = YourCharacterJob.MaxHealth;
                 }
             }
             else
@@ -295,7 +284,7 @@ namespace SpaceShip.Engine
             if (YourCharacter.CurrentXp >= neededXp)
             {
                 YourCharacter.CurrentLevel++;
-                YourCharacter.CurrentHealth += 5;
+                YourCharacterJob.CurrentHealth += 5;
                 YourCharacter.Attack += 2;
                 YourCharacter.Armor += 2;
                 return true;

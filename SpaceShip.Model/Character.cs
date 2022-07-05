@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace SpaceShip.Model
 {
-    public class Character
+    public class Character : Entity
     {
-        public string Name { get; set; }
-        public int MaxHealth { get; set; }
-        public int CurrentHealth { get; set; }
-        public int Armor { get; set; }
-        public int Attack { get; set; }
-        public bool IsActive { get; set; }
+
         public int MedipackQuantity { get; set; }
         public int ArmorImplantQuantity { get; set; }
         public int CurrentXp { get; set; }
@@ -21,11 +16,14 @@ namespace SpaceShip.Model
         public int[] ToLevelUp { get; set; }  
 
 
-        public Character(int maxHealth, int currentHealth)
+        public Character()
         {
-            MaxHealth = maxHealth;
-            CurrentHealth = currentHealth;
             
+            MedipackQuantity = 2;
+            ArmorImplantQuantity = 1;
+            CurrentLevel = 1;
+            CurrentXp = 0;
+
         }
 
 
