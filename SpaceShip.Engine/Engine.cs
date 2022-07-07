@@ -13,6 +13,7 @@ namespace SpaceShip.Engine
         public Monster AppearingMonster { get; set; }
         public DicesManager DicesManager { get; set; }
 
+
         public List<Job> JobsList
         {
             get
@@ -24,21 +25,21 @@ namespace SpaceShip.Engine
 
         private List<Job> jobsList = new List<Job>
         {
-            new Job(14, 14)
+            new Job(16, 16)
             {
                 Name = "Soldier",
                 Armor = 14,
                 Attack = 4,
                 IsActive = true
             },
-            new Job(12, 12)
+            new Job(14, 14)
             {
                 Name = "Smuggler",
                 Armor = 12,
                 Attack = 6,
                 IsActive = true
             },
-            new Job(10, 10)
+            new Job(12, 12)
             {
                 Name = "Alchimist",
                 Armor = 10,
@@ -98,7 +99,7 @@ namespace SpaceShip.Engine
                 MinDamage = 1,
                 MaxDamage = 6,
                 Attack = 4,
-                XpValue = 30
+                XpValue = 50
             },
             new Monster()
             {
@@ -108,7 +109,7 @@ namespace SpaceShip.Engine
                 MinDamage = 1,
                 MaxDamage = 4,
                 Attack = 1,
-                XpValue = 15
+                XpValue = 25
             },
             new Monster()
             {
@@ -118,7 +119,7 @@ namespace SpaceShip.Engine
                 MinDamage = 1,
                 MaxDamage = 6,
                 Attack = 2,
-                XpValue = 20
+                XpValue = 30
             },
             new Monster()
             {
@@ -128,7 +129,7 @@ namespace SpaceShip.Engine
                 MinDamage = 1,
                 MaxDamage = 8,
                 Attack = 3,
-                XpValue = 25
+                XpValue = 40
             }
         };
 
@@ -285,7 +286,8 @@ namespace SpaceShip.Engine
             if (YourCharacter.CurrentXp >= neededXp)
             {
                 YourCharacter.CurrentLevel++;
-                YourCharacterJob.CurrentHealth += 5;
+                YourCharacterJob.MaxHealth += 5;
+                YourCharacterJob.CurrentHealth = YourCharacterJob.MaxHealth;
                 YourCharacter.Attack += 2;
                 YourCharacter.Armor += 2;
                 return true;
