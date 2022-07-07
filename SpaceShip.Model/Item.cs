@@ -10,7 +10,7 @@ namespace SpaceShip.Model
     {
         public string Name { get; set; }
         public int Quantity { get; set; }     
-        public int MinEffect { get; set; } // Until now, how much you regain life
+        public int MinEffect { get; set; } 
         public int MaxEffect { get; set; }
 
         public Item()

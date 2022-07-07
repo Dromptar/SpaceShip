@@ -24,21 +24,21 @@ namespace SpaceShip.Engine
 
         private List<Character> availableCharactersList = new List<Character>
         {
-            new Character(14, 14)
+            new Character(16, 16)
             {
                 Name = "Soldier",
                 Armor = 14,
                 Attack = 4,
                 IsActive = true
             },
-            new Character(12, 12)
+            new Character(14, 14)
             {
                 Name = "Smuggler",
                 Armor = 12,
                 Attack = 6,
                 IsActive = true
             },
-            new Character(10, 10)
+            new Character(12, 12)
             {
                 Name = "Alchimist",
                 Armor = 10,
@@ -98,7 +98,7 @@ namespace SpaceShip.Engine
                 MinDamage = 1,
                 MaxDamage = 6,
                 Attack = 4,
-                XpValue = 30
+                XpValue = 50
             },
             new Monster()
             {
@@ -108,7 +108,7 @@ namespace SpaceShip.Engine
                 MinDamage = 1,
                 MaxDamage = 4,
                 Attack = 1,
-                XpValue = 15
+                XpValue = 25
             },
             new Monster()
             {
@@ -118,7 +118,7 @@ namespace SpaceShip.Engine
                 MinDamage = 1,
                 MaxDamage = 6,
                 Attack = 2,
-                XpValue = 20
+                XpValue = 30
             },
             new Monster()
             {
@@ -128,7 +128,7 @@ namespace SpaceShip.Engine
                 MinDamage = 1,
                 MaxDamage = 8,
                 Attack = 3,
-                XpValue = 25
+                XpValue = 40
             }
         };
 
@@ -291,7 +291,8 @@ namespace SpaceShip.Engine
             if (SelectedCharacter.CurrentXp >= neededXp)
             {
                 SelectedCharacter.CurrentLevel++;
-                SelectedCharacter.CurrentHealth += 5;
+                SelectedCharacter.MaxHealth += 5;
+                SelectedCharacter.CurrentHealth = SelectedCharacter.MaxHealth;
                 SelectedCharacter.Attack += 2;
                 SelectedCharacter.Armor += 2;
                 return true;

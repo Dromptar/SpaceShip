@@ -40,7 +40,7 @@ namespace SpaceShip.Front
             Console.WriteLine();
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("To begin, what is your name ? ");
+            Console.WriteLine("Hello there ! What is your name ? ");
             string playerName= inputManager.GetPlayerString(2, 30);
 
             Console.ForegroundColor = ConsoleColor.White;
@@ -104,6 +104,7 @@ namespace SpaceShip.Front
             // We generate a random monster and use the weapon picked up by player to start a fight
             engine.GenerateMonster();
             engine.AppearingMonster.CurrentHealth = engine.AppearingMonster.MaxHealth;
+            
 
             Console.WriteLine($"You enter the room. It's dark, but you can see a big shadow in front of you. " +
                                 $"Looks to be a {engine.AppearingMonster.Name}.");
