@@ -154,6 +154,7 @@ namespace SpaceShip.Engine
         public GameEngine() // constructor
         {
             DicesManager = new DicesManager();
+            YourCharacter = new Character();
         }
 
         // generating a random monster before each fight

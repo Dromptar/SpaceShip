@@ -193,7 +193,7 @@ namespace SpaceShip.Front
                 {
                     Console.WriteLine($"{engine.ItemsList.IndexOf(item) + 1}. {item.Name}");
                 }
-                int playerChoice3 = inputManager.GetPlayerInteger(engine.JobsList.Select(pro => engine.JobsList.IndexOf(pro)).ToList());
+                int playerChoice3 = inputManager.GetPlayerInteger(engine.ItemsList.Select(it => engine.ItemsList.IndexOf(it) + 1).ToList());
                 engine.SomeItem = engine.ItemsList[playerChoice3 - 1];
 
                 switch (playerChoice3)
