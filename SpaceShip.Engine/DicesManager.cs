@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SpaceShip.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceShip.Model
+namespace SpaceShip.Engine
 {
     public class DicesManager
     {

@@ -1,5 +1,6 @@
 ﻿
 using SpaceShip.Model;
+using SpaceShip.Model.Entities;
 
 namespace SpaceShip.Engine
 {
@@ -7,45 +8,44 @@ namespace SpaceShip.Engine
     public class GameEngine
     {
         public Item SomeItem { get; set; }
-        public Character YourCharacter { get; set; }
-        public Job YourCharacterJob { get; set; }
+        public Character SelectedCharacter { get; set; }
         public Weapon SelectedWeapon { get; set; }
         public Monster AppearingMonster { get; set; }
         public DicesManager DicesManager { get; set; }
-
-        public List<Job> JobsList
+        private Random rnd { get; set; }
+        public List<Character> AvailableCharactersList
         {
             get
             {
-                return jobsList.Where(pro => pro.IsActive).ToList();
+                return availableCharactersList.Where(pro => pro.IsActive).ToList();
             }
 
         }
 
-        private List<Job> jobsList = new List<Job>
+        private List<Character> availableCharactersList = new List<Character>
         {
-            new Job(14, 14)
+            new Character(14, 14)
             {
                 Name = "Soldier",
                 Armor = 14,
                 Attack = 4,
                 IsActive = true
             },
-            new Job(12, 12)
+            new Character(12, 12)
             {
                 Name = "Smuggler",
                 Armor = 12,
                 Attack = 6,
                 IsActive = true
             },
-            new Job(10, 10)
+            new Character(10, 10)
             {
                 Name = "Alchimist",
                 Armor = 10,
                 Attack = 8,
                 IsActive = true
             },
-            new Job(25, 25)
+            new Character(25, 25)
             {
                 Name = "GodMod",
                 Armor = 40,
@@ -154,13 +154,22 @@ namespace SpaceShip.Engine
         public GameEngine() // constructor
         {
             DicesManager = new DicesManager();
-            YourCharacter = new Character();
+            rnd = new Random();
+        }
+
+        public void PickCharacter(Character character)
+        {
+            SelectedCharacter = character;
+        }
+
+        public void PickWeapon(Weapon weapon)
+        {
+            SelectedWeapon = weapon;
         }
 
         // generating a random monster before each fight
         public void GenerateMonster()
         {
-            var rnd = new Random();
             int index = rnd.Next(MonstersList.Count);
             AppearingMonster = MonstersList[index];
         }
@@ -170,20 +179,19 @@ namespace SpaceShip.Engine
 
         public DiceResult MonsterAttack()
         {
-            int heroArmor = YourCharacterJob.Armor + SelectedWeapon.BonusArmor;
+            int heroArmor = SelectedCharacter.Armor + SelectedWeapon.BonusArmor;
             DiceResult roll = DicesManager.RollDice(20, heroArmor, AppearingMonster.Attack);
             return roll;
         }
 
         public DiceResult CharacterAttack()
         {
-            DiceResult roll = DicesManager.RollDice(20, AppearingMonster.Armor, YourCharacterJob.Attack);
+            DiceResult roll = DicesManager.RollDice(20, AppearingMonster.Armor, SelectedCharacter.Attack);
             return roll;
         }
 
         public int MonsterRandomDamage(Monster monster)
         {
-            Random rnd = new Random();
             int damage = rnd.Next(monster.MinDamage, monster.MaxDamage);
             return damage;
         }
@@ -191,19 +199,18 @@ namespace SpaceShip.Engine
         public int MonsterDamage()
         {
             int damage = MonsterRandomDamage(AppearingMonster);
-            YourCharacterJob.CurrentHealth -= damage;
-            if (YourCharacterJob.CurrentHealth < 0)
+            SelectedCharacter.CurrentHealth -= damage;
+            if (SelectedCharacter.CurrentHealth < 0)
             {
-                YourCharacterJob.CurrentHealth = 0;
+                SelectedCharacter.CurrentHealth = 0;
             }
             return damage;
         }
 
         public int WeaponRandomDamage(Weapon weapon)
         {
-            Random rnd = new Random();
             int damage = rnd.Next(weapon.MinDamage, weapon.MaxDamage);
-            if(damage == 20)
+            if (damage == 20)
             {
                 return damage * 2;
             }
@@ -213,7 +220,7 @@ namespace SpaceShip.Engine
         {
             int damage = WeaponRandomDamage(SelectedWeapon);
             AppearingMonster.CurrentHealth -= damage;
-            if(AppearingMonster.CurrentHealth < 0)
+            if (AppearingMonster.CurrentHealth < 0)
             {
                 AppearingMonster.CurrentHealth = 0;
             }
@@ -222,7 +229,7 @@ namespace SpaceShip.Engine
 
         public bool KeepFighting()
         {
-            if (YourCharacterJob.CurrentHealth > 0)
+            if (SelectedCharacter.CurrentHealth > 0)
                 return true;
             else
                 return false;
@@ -235,13 +242,12 @@ namespace SpaceShip.Engine
 
         public bool YouLoseTheFight()
         {
-            return YourCharacterJob.CurrentHealth <= 0;
+            return SelectedCharacter.CurrentHealth <= 0;
         }
 
         /**********************  Items / Inventory system  **********************/
         public int ItemEffect(Item item)
         {
-            Random rnd = new Random();
             int itemEffect = rnd.Next(item.MinEffect, item.MaxEffect);
             return itemEffect;
         }
@@ -249,13 +255,13 @@ namespace SpaceShip.Engine
         public int Medipack()
         {
             int regainLife = ItemEffect(SomeItem);
-            if(YourCharacter.MedipackQuantity > 0)
+            if (SelectedCharacter.MedipackQuantity > 0)
             {
-                YourCharacterJob.CurrentHealth += regainLife;
+                SelectedCharacter.CurrentHealth += regainLife;
 
-                if (YourCharacterJob.CurrentHealth > YourCharacterJob.MaxHealth)
+                if (SelectedCharacter.CurrentHealth > SelectedCharacter.MaxHealth)
                 {
-                    YourCharacterJob.CurrentHealth = YourCharacterJob.MaxHealth;
+                    SelectedCharacter.CurrentHealth = SelectedCharacter.MaxHealth;
                 }
             }
             else
@@ -268,31 +274,31 @@ namespace SpaceShip.Engine
         public int ArmorImplant()
         {
             int increaseArmor = ItemEffect(SomeItem);
-            YourCharacter.Armor += increaseArmor;
+            SelectedCharacter.Armor += increaseArmor;
             return increaseArmor;
         }
 
         /**********************  Leveling System  **********************/
         public void AddExperience()
         {
-            YourCharacter.CurrentXp += AppearingMonster.XpValue;
+            SelectedCharacter.CurrentXp += AppearingMonster.XpValue;
         }
 
         public bool LevelUp()
         {
             //Here comes new stats modifications
-            var neededXp = YourCharacter.CurrentLevel * 100 * 1.25;
-            if (YourCharacter.CurrentXp >= neededXp)
+            var neededXp = SelectedCharacter.CurrentLevel * 100 * 1.25;
+            if (SelectedCharacter.CurrentXp >= neededXp)
             {
-                YourCharacter.CurrentLevel++;
-                YourCharacterJob.CurrentHealth += 5;
-                YourCharacter.Attack += 2;
-                YourCharacter.Armor += 2;
+                SelectedCharacter.CurrentLevel++;
+                SelectedCharacter.CurrentHealth += 5;
+                SelectedCharacter.Attack += 2;
+                SelectedCharacter.Armor += 2;
                 return true;
             }
             else
                 return false;
         }
-       
+
     }
- }
+}

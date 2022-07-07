@@ -46,17 +46,17 @@ namespace SpaceShip.Front
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine($"Hi {playerName}. Choose your profession : ");
             Console.WriteLine();
-            foreach (var job in engine.JobsList)
+            foreach (var job in engine.AvailableCharactersList)
             {
-                Console.WriteLine($"{engine.JobsList.IndexOf(job) + 1}. {job.Name}");
+                Console.WriteLine($"{engine.AvailableCharactersList.IndexOf(job) + 1}. {job.Name}");
             }
 
             
-            int playerChoice = inputManager.GetPlayerInteger(engine.JobsList.Select(job => engine.JobsList.IndexOf(job)+1).ToList());
-                    
+            int playerChoice = inputManager.GetPlayerInteger(engine.AvailableCharactersList.Select(job => engine.AvailableCharactersList.IndexOf(job)+1).ToList());
+            engine.PickCharacter(engine.AvailableCharactersList[playerChoice - 1]);
 
-            Console.WriteLine($"You are a {engine.JobsList[playerChoice - 1].Name} !" + "\n" +
-                              $"The {engine.JobsList[playerChoice - 1].Name} offers you {engine.JobsList[playerChoice - 1].MaxHealth} HP and {engine.JobsList[playerChoice - 1].Armor} of protection. ");
+            Console.WriteLine($"You are a {engine.SelectedCharacter.Name} !" + "\n" +
+                              $"The {engine.SelectedCharacter.Name} offers you {engine.SelectedCharacter.MaxHealth} HP and {engine.SelectedCharacter.Armor} of protection. ");
                
 
             Console.WriteLine("Press any key to continue...");
@@ -72,10 +72,11 @@ namespace SpaceShip.Front
 
             // When weapon is picked, we give some information to player
             int playerChoice2 = inputManager.GetPlayerInteger(engine.WeaponsList.Select(weap => engine.WeaponsList.IndexOf(weap)+1).ToList());
-            
-            Console.WriteLine($"You picked {engine.WeaponsList[playerChoice2 - 1].Name} !" + "\n" +
-                              $"It's a powerful ally which deals between {engine.WeaponsList[playerChoice2 - 1].MinDamage} and {engine.WeaponsList[playerChoice2 - 1].MaxDamage} damages to an eventual target. " + "\n" +
-                              $"Moreover, this weapon increases your natural armor by {engine.WeaponsList[playerChoice2 - 1].BonusArmor} points. ");
+            engine.PickWeapon(engine.WeaponsList[playerChoice2 - 1]);
+
+            Console.WriteLine($"You picked {engine.SelectedWeapon.Name} !" + "\n" +
+                              $"It's a powerful ally which deals between {engine.SelectedWeapon.MinDamage} and {engine.SelectedWeapon.MaxDamage} damages to an eventual target. " + "\n" +
+                              $"Moreover, this weapon increases your natural armor by {engine.SelectedWeapon.BonusArmor} points. ");
             Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
@@ -89,13 +90,11 @@ namespace SpaceShip.Front
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
             Console.WriteLine();
-            Console.WriteLine($"Now , be brave and proud young {engine.JobsList[playerChoice - 1].Name} and let's fight the evil of the lost Spaceship with your new {engine.WeaponsList[playerChoice2 - 1].Name} ..." + "\n" +
+            Console.WriteLine($"Now , be brave and proud young {engine.SelectedCharacter.Name} and let's fight the evil of the lost Spaceship with your new {engine.SelectedWeapon.Name} ..." + "\n" +
                 $"Ready?");
             Console.ReadKey(true);
             Console.Clear();
 
-            engine.YourCharacterJob = engine.JobsList[playerChoice - 1];
-            engine.SelectedWeapon = engine.WeaponsList[playerChoice2 - 1];
         }
             
 
@@ -110,14 +109,14 @@ namespace SpaceShip.Front
                                 $"Looks to be a {engine.AppearingMonster.Name}.");
             Console.WriteLine($"You grab your {engine.SelectedWeapon.Name} and a violent fight takes place!");
             Console.WriteLine($"This {engine.AppearingMonster.Name} has {engine.AppearingMonster.MaxHealth} HP.");
-            Console.WriteLine($"You have {engine.YourCharacterJob.CurrentHealth} HP.");
+            Console.WriteLine($"You have {engine.SelectedCharacter.CurrentHealth} HP.");
             Console.ReadKey(true);
             Console.Clear();
 
             // Starting the fight
             // engine.Appearing_monster.CurrentHealth = engine.Appearing_monster.MaxHealth;
 
-            while (engine.AppearingMonster.CurrentHealth >= 0 || engine.YourCharacterJob.CurrentHealth >= 0)
+            while (engine.AppearingMonster.CurrentHealth >= 0 || engine.SelectedCharacter.CurrentHealth >= 0)
             {
                 // Tour du monstre
                
@@ -125,11 +124,11 @@ namespace SpaceShip.Front
                 var CharacterAttack = engine.CharacterAttack();
                 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"You have {engine.YourCharacterJob.Armor + engine.SelectedWeapon.BonusArmor} of defense. {engine.AppearingMonster.Name} attacks and scores {MonsterAttack.Score}.");
+                Console.WriteLine($"You have {engine.SelectedCharacter.Armor + engine.SelectedWeapon.BonusArmor} of defense. {engine.AppearingMonster.Name} attacks and scores {MonsterAttack.Score}.");
                 if (MonsterAttack.Success)
                 {
                     Console.WriteLine($"The creature hurts you and you lose {engine.MonsterDamage()} Hp.");
-                    Console.WriteLine($"You still have {engine.YourCharacterJob.CurrentHealth} HP.");
+                    Console.WriteLine($"You still have {engine.SelectedCharacter.CurrentHealth} HP.");
                 }
                 else
                 {
@@ -167,11 +166,11 @@ namespace SpaceShip.Front
                     engine.AddExperience();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"The {engine.AppearingMonster.Name} is dead. Well done! You won the fight!");
-                    Console.WriteLine($"You still have {engine.YourCharacterJob.CurrentHealth} HP after the fight.");
-                    Console.WriteLine($"You won {engine.AppearingMonster.XpValue} xp points and your xp is now {engine.YourCharacter.CurrentXp}");
+                    Console.WriteLine($"You still have {engine.SelectedCharacter.CurrentHealth} HP after the fight.");
+                    Console.WriteLine($"You won {engine.AppearingMonster.XpValue} xp points and your xp is now {engine.SelectedCharacter.CurrentXp}");
                     if (engine.LevelUp())
                     {
-                        Console.WriteLine($"Congratulation, you are now level {engine.YourCharacter.CurrentLevel}.");
+                        Console.WriteLine($"Congratulation, you are now level {engine.SelectedCharacter.CurrentLevel}.");
                     }
                     break;
                 }
@@ -201,13 +200,13 @@ namespace SpaceShip.Front
                     case 1:
                         Console.WriteLine($"You use {engine.ItemsList[playerChoice3 - 1].Name} !" + "\n" +
                                             $"You regen {engine.Medipack()} HP." + "\n" +
-                                            $"You feel better and now have {engine.YourCharacterJob.CurrentHealth} HP");
+                                            $"You feel better and now have {engine.SelectedCharacter.CurrentHealth} HP");
                         break;
 
                     case 2:
                         Console.WriteLine($"You use {engine.ItemsList[playerChoice3 - 1].Name} !" + "\n" +
                                           $"You increased your armor by {engine.ArmorImplant()} points." + "\n" +
-                                          $"You feel stronger and now have {engine.YourCharacterJob.Armor} armor score.");
+                                          $"You feel stronger and now have {engine.SelectedCharacter.Armor} armor score.");
                         break;
                 }
 
