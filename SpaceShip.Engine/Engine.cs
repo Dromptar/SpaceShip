@@ -87,8 +87,29 @@ namespace SpaceShip.Engine
                 MaxDamage = 12
             },
         };
+        public List<Monster> EarlyGameMonsters 
+        {
+            get
+            {
+                return AllMonstersList.Where(mon => mon.Difficulty == 1).ToList();
+            }
+        }
+        public List<Monster> MidGameMonsters
+        {
+            get
+            {
+                return AllMonstersList.Where(mon => mon.Difficulty == 2).ToList();
+            }
+        }
+        public List<Monster> EndGameMonsters
+        {
+            get
+            {
+                return AllMonstersList.Where(mon => mon.Difficulty == 3).ToList();
+            }
+        }
 
-        public List<Monster> MonstersList = new List<Monster>
+        private List<Monster> AllMonstersList = new List<Monster>
         {
             new Monster()
             {
@@ -98,6 +119,7 @@ namespace SpaceShip.Engine
                 MinDamage = 1,
                 MaxDamage = 6,
                 Attack = 4,
+                Difficulty = 3,
                 XpValue = 50
             },
             new Monster()
@@ -108,26 +130,29 @@ namespace SpaceShip.Engine
                 MinDamage = 1,
                 MaxDamage = 4,
                 Attack = 1,
+                Difficulty = 1,
                 XpValue = 25
             },
             new Monster()
             {
-                Name = "Droid",
+                Name = "Zerg",
                 MaxHealth = 7,
                 Armor = 10,
                 MinDamage = 1,
                 MaxDamage = 6,
                 Attack = 2,
+                Difficulty = 1,
                 XpValue = 30
             },
             new Monster()
             {
-                Name = "Trandoshan",
+                Name = "Klingon",
                 MaxHealth = 10,
                 Armor = 12,
                 MinDamage = 1,
                 MaxDamage = 8,
                 Attack = 3,
+                Difficulty = 2,
                 XpValue = 40
             }
         };
@@ -170,10 +195,27 @@ namespace SpaceShip.Engine
         // generating a random monster before each fight
         public void GenerateMonster()
         {
-            int index = rnd.Next(MonstersList.Count);
-            AppearingMonster = MonstersList[index];
+            List<Monster> myList = MonstersList();
+            int index = rnd.Next(myList.Count);
+            AppearingMonster = myList[index];
+            
         }
 
+        public List<Monster> MonstersList()
+        {
+            switch (SelectedCharacter.CurrentLevel)
+            {
+                case <= 3:
+                    return EarlyGameMonsters;
+
+                case <= 6:
+                    return MidGameMonsters;
+
+                case > 6:
+                    return EndGameMonsters;
+
+            }
+        }
 
         /**********************  Fighting system  **********************/
 

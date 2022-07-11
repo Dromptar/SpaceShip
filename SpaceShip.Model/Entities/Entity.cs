@@ -15,6 +15,7 @@ namespace SpaceShip.Model.Entities
         public int Attack { get; set; }
         public int MinDamage { get; set; }
         public int MaxDamage { get; set; }
+        public int CurrentLevel { get; set; }
 
     }
 }

@@ -83,7 +83,7 @@ namespace SpaceShip.Front
             Console.Clear();
 
             Console.WriteLine("Oh, one more thing before you go. The Spaceship could be dangerous.");
-            Console.WriteLine("You could meet some creatures during your trip, like  {0}", string.Join(", ", engine.MonstersList.Select(m => m.Name)));
+            Console.WriteLine("You could meet some creatures during your trip, like  {0}", string.Join(", ", engine.MonstersList().Select(m => m.Name)));
             Console.WriteLine("Be Careful...");
 
             Console.WriteLine();
@@ -115,8 +115,7 @@ namespace SpaceShip.Front
             Console.Clear();
 
             // Starting the fight
-            // engine.Appearing_monster.CurrentHealth = engine.Appearing_monster.MaxHealth;
-
+            
             while (engine.AppearingMonster.CurrentHealth >= 0 || engine.SelectedCharacter.CurrentHealth >= 0)
             {
                 // Tour du monstre
@@ -172,6 +171,7 @@ namespace SpaceShip.Front
                     if (engine.LevelUp())
                     {
                         Console.WriteLine($"Congratulation, you are now level {engine.SelectedCharacter.CurrentLevel}.");
+                        Console.WriteLine("Caution, you could now meet new monsters like  {0}", string.Join(", ", engine.MonstersList().Select(m => m.Name)));
                     }
                     break;
                 }

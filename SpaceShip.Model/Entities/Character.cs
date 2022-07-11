@@ -12,7 +12,6 @@ namespace SpaceShip.Model.Entities
         public int MedipackQuantity { get; set; }
         public int ArmorImplantQuantity { get; set; }
         public int CurrentXp { get; set; }
-        public int CurrentLevel { get; set; }
         public bool IsActive { get; set; }
 
         public Character(int maxHealth, int currentHealth)
