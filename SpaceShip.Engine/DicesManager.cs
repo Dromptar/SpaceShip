@@ -17,7 +17,7 @@ namespace SpaceShip.Engine
             DiceResult rollDice = new DiceResult();
             Dice dice = DicesList.First(x => x.MaxScore == maxScore);
             int result = rnd.Next(1, maxScore) + bonus;
-            bool touched = result > tresHold;
+            bool touched = result >= tresHold;
 
             rollDice.Dice = dice;
             rollDice.Score = result;

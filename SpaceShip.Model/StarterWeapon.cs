@@ -6,18 +6,15 @@ using System.Threading.Tasks;
 
 namespace SpaceShip.Model
 {
-    public class Weapon
+    public class StarterWeapon
     {
 
         public string Name { get; set; }
         public int BonusArmor { get; set; }
         public int MinDamage { get; set; }
         public int MaxDamage { get; set; }
-        
-       
-        
-        
-        public Weapon()
+
+        public StarterWeapon()
         {
             
 

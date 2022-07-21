@@ -1,18 +1,19 @@
 ﻿
 using SpaceShip.Model;
 using SpaceShip.Model.Entities;
+using SpaceShip.Model.Items;
 
 namespace SpaceShip.Engine
 {
 
     public class GameEngine
     {
-        public Item SomeItem { get; set; }
+        public Serums Serum { get; set; }
         public Character SelectedCharacter { get; set; }
-        public Weapon SelectedWeapon { get; set; }
+        public StarterWeapon SelectedWeapon { get; set; }
         public Monster AppearingMonster { get; set; }
         public DicesManager DicesManager { get; set; }
-        private Random rnd { get; set; }
+        private Random Rnd { get; set; }
         public List<Character> AvailableCharactersList
         {
             get
@@ -55,31 +56,31 @@ namespace SpaceShip.Engine
 
         };
 
-        public List<Weapon> WeaponsList = new List<Weapon>
+        public List<StarterWeapon> WeaponsList = new List<StarterWeapon>
         {
 
-            new Weapon
+            new StarterWeapon
             {
                 Name = "Blaster",
                 BonusArmor = 1,
                 MinDamage = 1,
                 MaxDamage = 10
             },
-            new Weapon
+            new StarterWeapon
             {
                 Name = "Laser Staff",
                 BonusArmor = 3,
                 MinDamage = 1,
                 MaxDamage = 6
             },
-            new Weapon
+            new StarterWeapon
             {
                 Name = "Energy Shield",
                 BonusArmor = 5,
                 MinDamage = 1,
                 MaxDamage = 4
             },
-            new Weapon
+            new StarterWeapon
             {
                 Name = "BFG",
                 BonusArmor = 10,
@@ -113,17 +114,6 @@ namespace SpaceShip.Engine
         {
             new Monster()
             {
-                Name = "Rancor",
-                MaxHealth = 14,
-                Armor = 13,
-                MinDamage = 1,
-                MaxDamage = 6,
-                Attack = 4,
-                Difficulty = 3,
-                XpValue = 50
-            },
-            new Monster()
-            {
                 Name = "Gretchin",
                 MaxHealth = 5,
                 Armor = 8,
@@ -146,6 +136,39 @@ namespace SpaceShip.Engine
             },
             new Monster()
             {
+                Name = "Space Pirate",
+                MaxHealth = 8,
+                Armor = 11,
+                MinDamage = 1,
+                MaxDamage = 6,
+                Attack = 4,
+                Difficulty = 1,
+                XpValue = 30
+            },
+            new Monster()
+            {
+                Name = "Fellworm",
+                MaxHealth = 4,
+                Armor = 14,
+                MinDamage = 1,
+                MaxDamage = 8,
+                Attack = 2,
+                Difficulty = 1,
+                XpValue = 30
+            },
+            new Monster()
+            {
+                Name = "Mutant",
+                MaxHealth = 8,
+                Armor = 14,
+                MinDamage = 1,
+                MaxDamage = 8,
+                Attack = 4,
+                Difficulty = 2,
+                XpValue = 40
+            },
+            new Monster()
+            {
                 Name = "Klingon",
                 MaxHealth = 10,
                 Armor = 12,
@@ -154,21 +177,54 @@ namespace SpaceShip.Engine
                 Attack = 3,
                 Difficulty = 2,
                 XpValue = 40
-            }
+            },
+            new Monster()
+            {
+                Name = "Crazy ingeneer",
+                MaxHealth = 10,
+                Armor = 10,
+                MinDamage = 1,
+                MaxDamage = 8,
+                Attack = 6,
+                Difficulty = 2,
+                XpValue = 45
+            },
+            new Monster()
+            {
+                Name = "Rancor",
+                MaxHealth = 18,
+                Armor = 14,
+                MinDamage = 1,
+                MaxDamage = 10,
+                Attack = 8,
+                Difficulty = 3,
+                XpValue = 50
+            },
+            new Monster()
+            {
+                Name = "Shadow beast",
+                MaxHealth = 15,
+                Armor = 14,
+                MinDamage = 1,
+                MaxDamage = 10,
+                Attack = 6,
+                Difficulty = 3,
+                XpValue = 50
+            },
         };
 
-        public List<Item> ItemsList = new List<Item>
+        public List<Serums> SerumsList = new List<Serums>
         {
-            new Item
+            new Serums
             {
-                Name = "Medipack",
+                Name = "Health Serum",
                 Quantity = 1,
                 MinEffect = 1,
                 MaxEffect = 8
             },
-            new Item
+            new Serums
             {
-                Name = "Armor implant",
+                Name = "Steel Skin",
                 Quantity = 1,
                 MinEffect = 1,
                 MaxEffect = 4
@@ -179,7 +235,7 @@ namespace SpaceShip.Engine
         public GameEngine() // constructor
         {
             DicesManager = new DicesManager();
-            rnd = new Random();
+            Rnd = new Random();
         }
 
         public void PickCharacter(Character character)
@@ -187,16 +243,16 @@ namespace SpaceShip.Engine
             SelectedCharacter = character;
         }
 
-        public void PickWeapon(Weapon weapon)
+        public void PickWeapon(StarterWeapon weapon)
         {
             SelectedWeapon = weapon;
         }
 
-        // generating a random monster before each fight
+        // generating a random monster before each fight scaling the hero level
         public void GenerateMonster()
         {
             List<Monster> myList = MonstersList();
-            int index = rnd.Next(myList.Count);
+            int index = Rnd.Next(myList.Count);
             AppearingMonster = myList[index];
             
         }
@@ -234,7 +290,7 @@ namespace SpaceShip.Engine
 
         public int MonsterRandomDamage(Monster monster)
         {
-            int damage = rnd.Next(monster.MinDamage, monster.MaxDamage);
+            int damage = Rnd.Next(monster.MinDamage, monster.MaxDamage);
             return damage;
         }
 
@@ -249,9 +305,9 @@ namespace SpaceShip.Engine
             return damage;
         }
 
-        public int WeaponRandomDamage(Weapon weapon)
+        public int WeaponRandomDamage(StarterWeapon weapon)
         {
-            int damage = rnd.Next(weapon.MinDamage, weapon.MaxDamage);
+            int damage = Rnd.Next(weapon.MinDamage, weapon.MaxDamage);
             if (damage == 20)
             {
                 return damage * 2;
@@ -288,15 +344,15 @@ namespace SpaceShip.Engine
         }
 
         /**********************  Items / Inventory system  **********************/
-        public int ItemEffect(Item item)
+        public int ItemEffect(Serums item)
         {
-            int itemEffect = rnd.Next(item.MinEffect, item.MaxEffect);
+            int itemEffect = Rnd.Next(item.MinEffect, item.MaxEffect);
             return itemEffect;
         }
 
         public int Medipack()
         {
-            int regainLife = ItemEffect(SomeItem);
+            int regainLife = ItemEffect(Serum);
             if (SelectedCharacter.MedipackQuantity > 0)
             {
                 SelectedCharacter.CurrentHealth += regainLife;
@@ -315,7 +371,7 @@ namespace SpaceShip.Engine
 
         public int ArmorImplant()
         {
-            int increaseArmor = ItemEffect(SomeItem);
+            int increaseArmor = ItemEffect(Serum);
             SelectedCharacter.Armor += increaseArmor;
             return increaseArmor;
         }

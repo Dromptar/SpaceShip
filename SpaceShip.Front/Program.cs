@@ -189,23 +189,23 @@ namespace SpaceShip.Front
             int playerChoice4 = inputManager.GetPlayerInteger(new List<int> { 1, 2, 3});
             if (playerChoice4 == 1)
             {
-                foreach (var item in engine.ItemsList)
+                foreach (var item in engine.SerumsList)
                 {
-                    Console.WriteLine($"{engine.ItemsList.IndexOf(item) + 1}. {item.Name}");
+                    Console.WriteLine($"{engine.SerumsList.IndexOf(item) + 1}. {item.Name}");
                 }
-                int playerChoice3 = inputManager.GetPlayerInteger(engine.ItemsList.Select(it => engine.ItemsList.IndexOf(it) + 1).ToList());
-                engine.SomeItem = engine.ItemsList[playerChoice3 - 1];
+                int playerChoice3 = inputManager.GetPlayerInteger(engine.SerumsList.Select(it => engine.SerumsList.IndexOf(it) + 1).ToList());
+                engine.Serum = engine.SerumsList[playerChoice3 - 1];
 
                 switch (playerChoice3)
                 {
                     case 1:
-                        Console.WriteLine($"You use {engine.ItemsList[playerChoice3 - 1].Name} !" + "\n" +
+                        Console.WriteLine($"You use {engine.SerumsList[playerChoice3 - 1].Name} !" + "\n" +
                                             $"You regen {engine.Medipack()} HP." + "\n" +
                                             $"You feel better and now have {engine.SelectedCharacter.CurrentHealth} HP");
                         break;
 
                     case 2:
-                        Console.WriteLine($"You use {engine.ItemsList[playerChoice3 - 1].Name} !" + "\n" +
+                        Console.WriteLine($"You use {engine.SerumsList[playerChoice3 - 1].Name} !" + "\n" +
                                           $"You increased your armor by {engine.ArmorImplant()} points." + "\n" +
                                           $"You feel stronger and now have {engine.SelectedCharacter.Armor} armor score.");
                         break;
